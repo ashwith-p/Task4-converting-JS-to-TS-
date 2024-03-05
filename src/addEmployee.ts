@@ -1,9 +1,11 @@
+import {border_change,createErrorMessage,removeErrorMessage,getLocalStorage,setLocalStorage} from "./common";
+import { RoleInformation } from "./addRoles";
 
 if(!getLocalStorage('data')){
     var myObject:employeeDetails[]=[];
     setLocalStorage('data',myObject);
 }
-var changeBorder=false;
+var checkBorder:boolean=false;
 var isFormValid=true;
 var cureentEmployeeList:employeeDetails[]=[];
 if(sessionStorage.getItem('updateDetails')){
@@ -11,7 +13,7 @@ if(sessionStorage.getItem('updateDetails')){
 }
 var roleId:StringArray;
 var roleData:RoleInformation[]=getLocalStorage('roleData') as RoleInformation[];
-interface StringArray {
+export interface StringArray {
     [index: string]: string;
 }
 
@@ -35,7 +37,7 @@ var classNameMapProperty:StringArray={
 }
 
 
-class employeeDetails implements StringArray {
+export class employeeDetails implements StringArray {
     public status:string="";
     public empNo: string="";
     public firstName: string="";

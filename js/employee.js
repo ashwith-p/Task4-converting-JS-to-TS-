@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var table = document.querySelector(".employee-table");
 var rowLength = table.rows.length;
 var employeesList = JSON.parse(localStorage.getItem('data')); //change name to employeesList

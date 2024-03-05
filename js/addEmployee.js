@@ -1,16 +1,19 @@
 "use strict";
-if (!getLocalStorage('data')) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.employeeDetails = void 0;
+const common_1 = require("./common");
+if (!(0, common_1.getLocalStorage)('data')) {
     var myObject = [];
-    setLocalStorage('data', myObject);
+    (0, common_1.setLocalStorage)('data', myObject);
 }
-var changeBorder = false;
+var checkBorder = false;
 var isFormValid = true;
 var cureentEmployeeList = [];
 if (sessionStorage.getItem('updateDetails')) {
     var viewOrEdit = JSON.parse(sessionStorage.getItem('updateDetails'));
 }
 var roleId;
-var roleData = getLocalStorage('roleData');
+var roleData = (0, common_1.getLocalStorage)('roleData');
 var role;
 var roleInfo;
 var currentRoles = [];
@@ -61,10 +64,11 @@ class employeeDetails {
         }
     }
 }
+exports.employeeDetails = employeeDetails;
 employeeInitialize();
 function employeeInitialize() {
     validDates();
-    var details = getLocalStorage('data');
+    var details = (0, common_1.getLocalStorage)('data');
     roleId = JSON.parse(sessionStorage.getItem('roleId'));
     if (roleData) {
         var selectRole = document.getElementsByClassName('job-title')[0];
@@ -152,13 +156,13 @@ function validDates() {
     joiningDate.setAttribute("min", formattedDate);
 }
 function checkDuplicate(className) {
-    border_change(className);
-    var dataInLocalStorage = getLocalStorage('data');
+    (0, common_1.border_change)(className);
+    var dataInLocalStorage = (0, common_1.getLocalStorage)('data');
     if (dataInLocalStorage.length) {
         for (var j = 0; j < dataInLocalStorage.length; j++) {
             if (dataInLocalStorage[j].empNo == className.nodeValue) {
                 isFormValid = false;
-                (className.parentElement).appendChild(createErrorMessage("Eployee No. Already Exists"));
+                (className.parentElement).appendChild((0, common_1.createErrorMessage)("Eployee No. Already Exists"));
                 break;
             }
         }
@@ -177,7 +181,7 @@ function border_type_change(className) {
         className.style.padding = "6px";
         checkBorder = false;
     }
-    removeErrorMessage(className);
+    (0, common_1.removeErrorMessage)(className);
 }
 function validateDetails() {
     var form = document.getElementById("employee-details");
@@ -191,7 +195,7 @@ function validateDetails() {
             if (a.length == 0) {
                 element.style.border = "2px solid red";
                 parentId = parent.id;
-                document.getElementById(parentId).appendChild(createErrorMessage("This field is required"));
+                document.getElementById(parentId).appendChild((0, common_1.createErrorMessage)("This field is required"));
             }
         }
     }
@@ -237,17 +241,17 @@ function validateDetails() {
                             }
                         }
                     });
-                    setLocalStorage('roleData', roleData);
-                    setLocalStorage('data', cureentEmployeeList);
+                    (0, common_1.setLocalStorage)('roleData', roleData);
+                    (0, common_1.setLocalStorage)('data', cureentEmployeeList);
                 }
             }
-            var data = getLocalStorage('data');
+            var data = (0, common_1.getLocalStorage)('data');
             data.push(obj);
-            setLocalStorage('data', data);
+            (0, common_1.setLocalStorage)('data', data);
             if (roleInfo) {
                 role.employeesList.push(obj);
                 currentRoles.push(role);
-                setLocalStorage('roleData', currentRoles);
+                (0, common_1.setLocalStorage)('roleData', currentRoles);
                 ;
                 sessionStorage.removeItem('roleId');
                 window.location.href = "roles.html";
@@ -266,7 +270,7 @@ function checkABove18(className) {
     var currentDate = new Date();
     if (!(currentDate.getFullYear() - birthDate.getFullYear() >= 18)) {
         isFormValid = false;
-        (className.parentElement).appendChild(createErrorMessage("Age is less than 18"));
+        (className.parentElement).appendChild((0, common_1.createErrorMessage)("Age is less than 18"));
     }
 }
 document.getElementById('employee-details').addEventListener('submit', function (e) {

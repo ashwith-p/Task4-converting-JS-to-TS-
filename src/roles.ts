@@ -1,3 +1,5 @@
+import { RoleInformation } from "./addRoles";
+
 function createRoleCard(ele:RoleInformation)
 {
     var parent=document.createElement("div");

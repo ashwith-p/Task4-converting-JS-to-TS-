@@ -1,8 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getLocalStorage = exports.setLocalStorage = exports.removeErrorMessage = exports.border_change = exports.createErrorMessage = exports.checkBorder = void 0;
 var isSidebarToggled = false;
-var changeBorder = false;
 var mobileView = false;
-var checkBorder = false;
+exports.checkBorder = false;
 var changeName = document.querySelector('.roles-or-user-management');
 var rotateButton = document.querySelector('.handle');
 var removeArrowRole = document.querySelector(".side-arrow-roles");
@@ -71,17 +72,19 @@ function createErrorMessage(text) {
     span.appendChild(textNode);
     return span;
 }
+exports.createErrorMessage = createErrorMessage;
 function border_change(className) {
-    if (!checkBorder) {
+    if (!exports.checkBorder) {
         className.style.border = "2px solid rgb(0, 126, 252)";
-        checkBorder = true;
+        exports.checkBorder = true;
     }
     else {
         className.style.border = '2px solid #e2e2e2';
-        checkBorder = false;
+        exports.checkBorder = false;
     }
     removeErrorMessage(className);
 }
+exports.border_change = border_change;
 function removeErrorMessage(className) {
     const x = (className.parentNode);
     var a = x.getElementsByTagName("span");
@@ -89,9 +92,11 @@ function removeErrorMessage(className) {
         a[0].remove();
     }
 }
+exports.removeErrorMessage = removeErrorMessage;
 function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
+exports.setLocalStorage = setLocalStorage;
 function getLocalStorage(key) {
     if (localStorage.getItem(key)) {
         return JSON.parse(localStorage.getItem(key));
@@ -100,3 +105,4 @@ function getLocalStorage(key) {
         return [];
     }
 }
+exports.getLocalStorage = getLocalStorage;

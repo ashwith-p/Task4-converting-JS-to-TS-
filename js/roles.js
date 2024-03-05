@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function createRoleCard(ele) {
     var parent = document.createElement("div");
     parent.setAttribute("class", "role-card");

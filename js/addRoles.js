@@ -1,8 +1,11 @@
 "use strict";
-var cureentEmployeeList = getLocalStorage('data');
-if (!getLocalStorage('roleData').length) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RoleInformation = void 0;
+const common_1 = require("./common");
+var cureentEmployeeList = (0, common_1.getLocalStorage)('data');
+if (!(0, common_1.getLocalStorage)('roleData').length) {
     var roleData = [];
-    setLocalStorage('roleData', roleData);
+    (0, common_1.setLocalStorage)('roleData', roleData);
     ;
 }
 class RoleInformation {
@@ -16,6 +19,7 @@ class RoleInformation {
         this.employeesList = checkedList;
     }
 }
+exports.RoleInformation = RoleInformation;
 var roleExists = false;
 var obj = {};
 var editedData = {
@@ -67,7 +71,7 @@ function validateRole() {
             var a = parent.getElementsByTagName("span");
             if (a.length == 0) {
                 element.style.border = "2px solid red";
-                parent.appendChild(createErrorMessage("This field is required"));
+                parent.appendChild((0, common_1.createErrorMessage)("This field is required"));
             }
         }
         else {
@@ -177,13 +181,13 @@ function getEmployeeDetails(checkedList) {
     return list;
 }
 function findDuplicateRoles(className) {
-    border_change(className);
+    (0, common_1.border_change)(className);
     var name = document.getElementById('designation').value;
     name = name.replace(" ", "");
     var roleData = JSON.parse(localStorage.getItem('roleData'));
     roleData.forEach((ele) => {
         if (name.toLowerCase() == (ele.designation).replace(" ", "").toLowerCase()) {
-            document.getElementById('designation').parentElement.appendChild(createErrorMessage('Role Already Exista'));
+            document.getElementById('designation').parentElement.appendChild((0, common_1.createErrorMessage)('Role Already Exista'));
             roleExists = true;
         }
     });

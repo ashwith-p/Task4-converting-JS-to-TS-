@@ -1,3 +1,5 @@
+import { employeeDetails } from "./addEmployee";
+import { RoleInformation } from "./addRoles";
 
 var table:HTMLTableElement = document.querySelector(".employee-table")!;
 var rowLength = table.rows.length;

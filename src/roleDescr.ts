@@ -1,3 +1,6 @@
+import { employeeDetails,StringArray } from "./addEmployee";
+
+
 intitializer();
 var currentId:string;
 function createCard(ele:employeeDetails)

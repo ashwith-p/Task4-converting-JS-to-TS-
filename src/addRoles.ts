@@ -1,10 +1,12 @@
+import { getLocalStorage,setLocalStorage ,border_change,createErrorMessage} from "./common";
+import { employeeDetails,StringArray} from "./addEmployee";
 
 var cureentEmployeeList:employeeDetails[]=getLocalStorage('data') as employeeDetails[];
 if(!getLocalStorage('roleData').length){
 var roleData:RoleInformation[]=[];
 setLocalStorage('roleData',roleData);;
 }
-class RoleInformation{
+export class RoleInformation{
     public id:string;
     public designation:string;
     public roleDepartment:string;

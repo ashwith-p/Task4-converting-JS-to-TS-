@@ -1,7 +1,9 @@
+import { employeeDetails } from "./addEmployee";
+import { RoleInformation } from "./addRoles";
+
 var isSidebarToggled=false;
-var changeBorder=false;
 var mobileView=false;
-var checkBorder=false;
+export var checkBorder=false;
 var changeName:HTMLElement=document.querySelector('.roles-or-user-management')!;
 var rotateButton:HTMLElement=document.querySelector('.handle')!;
 var removeArrowRole:HTMLElement=document.querySelector(".side-arrow-roles")!;
@@ -70,7 +72,7 @@ function onScreenToNormal()
         changeName.innerHTML="ROLE/USER MANAGEMENT";
 }
 
-function createErrorMessage(text:string):HTMLElement
+export function createErrorMessage(text:string):HTMLElement
 {
     var span=document.createElement("span");
     var textNode=document.createTextNode(text);
@@ -79,7 +81,7 @@ function createErrorMessage(text:string):HTMLElement
     return span;
 }
 
-function border_change(className:HTMLElement)
+export  function border_change(className:HTMLElement)
 {
     
     if(!checkBorder){
@@ -93,7 +95,7 @@ function border_change(className:HTMLElement)
     removeErrorMessage(className);
 }
 
-function removeErrorMessage(className:HTMLElement)
+export function removeErrorMessage(className:HTMLElement)
 {
     
     const x=(className.parentNode);
@@ -104,10 +106,10 @@ function removeErrorMessage(className:HTMLElement)
     }
 }
 
-function setLocalStorage(key:string,data:employeeDetails[]|RoleInformation[]){
+export function setLocalStorage(key:string,data:employeeDetails[]|RoleInformation[]){
     localStorage.setItem(key,JSON.stringify(data));
 }
-function getLocalStorage(key:string):(employeeDetails[]| RoleInformation[]){
+export function getLocalStorage(key:string):(employeeDetails[]| RoleInformation[]){
     if(localStorage.getItem(key)){
     return JSON.parse(localStorage.getItem(key)!);}
     else{

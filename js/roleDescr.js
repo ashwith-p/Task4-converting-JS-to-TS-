@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 intitializer();
 var currentId;
 function createCard(ele) {
