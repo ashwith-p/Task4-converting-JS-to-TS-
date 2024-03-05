@@ -1,0 +1,195 @@
+*{
+    padding: 0px;
+    font-family: 'Helvetica', sans-serif;
+    font-family: 'Helvetica Light', sans-serif;
+}
+body{
+    margin: 0px;
+    display: flex;
+    width: 100%;
+}
+
+.horizantal-content {
+    box-shadow: 0px 0px 4px rgb(212, 200, 200);
+    height: 100vh;
+    position: sticky;
+    top: 0px;
+    display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 196px;
+}
+
+
+.handle {
+    position: absolute;
+    left: 175px;
+    top: 3%;
+    cursor: pointer;
+}
+.horizantal-nav-description{
+    font-size: 10px;
+    padding-top: 23px;
+    opacity: 0.4;
+    padding-left: 10px;
+}
+.roles-or-user-management{
+    padding-top: 0px;
+}
+
+.horizantal-nav{
+    padding:10px; 
+}
+.horizantal-nav-names{
+    font-size: 12px;
+    opacity: 0.7;
+}
+.horizontal-logos{
+    width: 18px;
+    
+}
+.brand-icon{
+    display: none;
+}
+.features{
+    
+    display: flex;
+    padding-left: 8px;
+    border-radius: 5px;
+    position: relative;
+    width: 170px;
+}
+
+.brand-logo {
+    width: 55%;
+    padding: 4px 5px;
+}
+
+.install-update{
+    margin-top: 64%;
+    padding: 7%;
+    border-radius: 10px;
+    width: 82%;
+    background-color: #FEF6F6;
+
+}
+.side-arrow-roles{
+    rotate: 270deg;
+    width: 10px;
+    margin-left: 90px;
+    opacity: 0.6;
+}
+
+.side-arrow-user {
+    rotate: 270deg;
+    width: 10px;
+    margin-left: 43px;
+    opacity: 0.6;
+}
+
+.update-text{
+    color: #F44848;
+}
+
+.install-update button{
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+.dismiss-btn{
+    color: #F44848;
+    background-color: #FDE6E6;
+    border:none
+}
+.accept-btn{
+    color: #ffffff;
+    background-color: #F44848;
+    border: none;
+}
+.install-update button:hover{
+    color: #ffffff;
+    background-color: #F44848;
+}
+
+.container{
+    padding: 10px 15px;
+    width: calc(100% - 230px);
+    position: relative;
+    overflow: scroll;
+    height: 98vh;
+}
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.vertical-nav{
+    padding: 10px;
+    box-shadow: 0px 0px 4px rgb(212, 200, 200);
+    border-radius: 5px;
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    background-color: #ffffff;
+    top: 0px;
+    z-index: 5;
+    
+}
+.search-box {
+    width: 60%;
+    height: 28px;
+    border: none;
+    padding-left: 7px;
+    outline: none;
+}
+.down-arrow{
+    width: 15px;
+}
+.admin-img{
+    width: 35px;
+}
+.admin-details{
+    display: flex;
+    height: 42px;
+    align-items: center;
+    justify-content: space-between;
+    width: 15%;
+}
+.admin-details p{
+    margin: 0px;
+}
+.admin-name{
+    font-size: 13px;
+}
+
+.toggle{
+    width:75px;
+}
+/* .toggle .install-update{
+        display: none;
+    } */
+.toggle .horizantal-nav{
+        width: 73%;
+    }
+.toggle .horizantal-nav-names,.toggle .install-update,.toggle .brand-logo{
+        display: none;
+    }
+.toggle .horizontal-logos{
+        width: 26px;
+        padding: 10px;
+    }
+.toggle .features{
+        padding: 0px;
+        width: 46px;
+    }
+/* .toggle .brand-logo{
+    display: none;
+} */
+.toggle .brand-icon{
+    display: block;
+    width: 45px;
+}
+.toggle .handle{
+    left:55px
+}
