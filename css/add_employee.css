@@ -1,0 +1,198 @@
+.features{
+    column-gap: 10px;
+}
+.employees{
+    background-color:#FDE6E6 ;
+    color: #F44848;
+}
+.roles-btn{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.employees::after{
+
+    content: "";
+    background-color: #F44848;
+    width: 3px;
+    height: 40px;
+    position: absolute;
+    right: -9px;
+    border-radius: 2px 0px 0px 2px;
+}
+.heading{
+    font-size: 20px;
+}
+.remove-decoration{
+    text-decoration: none;
+}
+.add-employee{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 35px;
+    font-size: 14px;
+}
+.profile-img{
+    width: 7%;
+    text-align: center;
+}
+.profile-img img{
+    border-radius: 110px;
+    width: 70px;
+}
+.display-flex{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+label{
+    padding: 6px;
+    padding-left: 0px;
+}
+.personal-info input{
+    padding: 6px;
+    width: 228px;
+    outline: none;
+    border: 2px solid #e2e2e2;
+}
+.employee-info input{
+    padding: 6px;
+    width: 360px;
+    outline: none;
+    border: 1px solid #d2d2d2;
+
+}
+.basic-info{
+    display: flex;
+    column-gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    margin:2px;
+}
+select{
+    height: 34px;
+    width: 375px;
+    outline: none;
+    border: 1px solid #d2d2d2;
+
+}
+.buttons{
+    padding-top: 50px;
+    text-align: right;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: right;
+}
+.buttons input{
+    padding: 7px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.cancel-btn{
+    color: #F44848;
+    background-color: #FDE6E6;
+    border:none
+}
+.add-btn{
+    color: #ffffff;
+    background-color: #F44848;
+    border: none;
+}
+.add-cancel-buttons button:hover{
+    color: #ffffff;
+    background-color: #F44848;   
+}
+.warning{
+    color: #F44848;
+    font-size: 10px;
+    
+}
+
+@media screen and (max-width:1156px) {
+    .admin-details{
+        width: 23%;
+    }
+    .search-box {
+        width: 43%;
+    }
+    
+}
+
+@media screen and (max-width:1006px) {
+    .personal-info input{
+        width: 175px;
+    }
+    .employee-info input{
+        width: 240px;
+    }
+    select{
+        width: 256px;
+    } 
+}
+
+@media screen and (max-width:856px) {
+    .admin-details{
+        width: 27%;
+    }
+    .search-box {
+        width: 38%;
+    }
+    .personal-info input{
+        width: 140px;
+    }
+    .employee-info input{
+        width: 180px;
+    }
+    select{
+        width: 196px;
+    } 
+    .profile-img img {
+        border-radius: 110px;
+        width: 50px;
+    }
+}
+
+@media screen and (max-width:756px) {
+    .admin-img {
+        width: 25px;
+        }
+    
+        .admin-name {
+            font-size: 10px;
+        }
+    
+        
+        .designation{
+            font-size: 11px;
+        }
+        .search-icon{
+            width: 15px;
+        }
+        .language-icon{
+            width: 25px;
+        }
+        .dashboard-icon{
+            width: 15px;
+        }
+        .mode-icon{
+            width: 27px;
+        }
+        .notifications-icon{
+            width: 31px;
+        }
+}
+
+   @media screen and (max-width:526px) {
+    .admin-details p{
+        display: none;
+    }
+    .admin-details{
+        width: 15%;
+    }
+    .down-arrow{
+        width: 12px;
+    }
+}
+

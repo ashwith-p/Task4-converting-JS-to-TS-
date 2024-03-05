@@ -1,0 +1,497 @@
+
+.features{
+    column-gap: 10px;
+    width: 168px;
+}
+.employees{
+    background-color:#FDE6E6 ;
+    color: #F44848;
+}
+.roles-btn{
+    text-decoration: none;
+    color: black;
+}
+.employees::after{
+
+    content: "";
+    background-color: #F44848;
+    width: 3px;
+    height: 40px;
+    position: absolute;
+    right: -9px;
+    border-radius: 2px 0px 0px 2px;
+}
+.employees-add-export {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.export-btn {
+    width: 120px;
+    font-size: 13px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid;
+    height: 35px;
+    margin-right: 21px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+.export-btn img{
+    padding-right: 8px;
+    width: 15px;
+}
+
+.add-btn {
+    width: 190px;
+    font-size: 13px;
+    color: #ffffff;
+    border-radius: 5px;
+    background-color: #F44848;
+    border: none;
+    height: 40px;
+    box-shadow: 0px 0px 10px #928a8a;
+    display: inline-flex;
+    padding: 13px;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.add-btn img{
+    padding-right: 8px;
+    width: 15px;
+}
+.content {
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+.filter{
+    display: flex;
+}
+.filter ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 25px;
+}
+.filter a {
+    text-decoration: none;
+    color: #919DAC;
+    /* background-color: #EAEBEE;
+    padding: 10px 9px;
+    border-radius: 5px;
+    margin-left: 4px; */
+}
+.filter li{
+    display: inline-block;
+    background-color: #EAEBEE;
+    padding: 10px 9px;
+    border-radius: 5px;
+    margin-left: 4px;
+    width: 12px;
+    text-align: center;
+}
+.filter li:hover{
+    background-color: #F44848;
+    a{
+        color: white;
+    }
+
+}
+
+.drop-down-menu{
+    display: none;
+}
+.filter-search {
+    padding: 6px;
+    padding-left: 17px;
+    margin-top: 3px;
+    border-radius: 5px;
+    background-color: #FDF2F2;
+    border: 1px solid #fbc0c0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 15px;
+    flex-wrap: wrap;
+}
+.del-btn{
+    display: inline-flex;
+}
+#delete-btn{
+    cursor: pointer;
+}
+
+#filter-icon{
+    height: 40px;
+    padding-top: 15px;
+}
+
+.filter-search span{
+    color: #F44848;
+    margin-right: 5px;
+}
+.filter-search select{
+    padding: 8px 5px;
+    border: 1px solid #fbc0c0;
+    border-radius: 5px;
+}
+.reset-btn{
+    background-color: #ffffff;
+    color: #F44848;
+}
+.filter-search button{
+    padding: 5px 10px;
+    border: 1px solid #F44848;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.apply-btn{
+    background-color: #ffabab;
+    color: #ffffff;
+}
+
+.reset-btn:hover{
+    background-color: #F44848;
+    color: #ffffff;
+}
+.modify-table{
+    position: sticky;
+    top: 0px;
+    padding: 7px;
+    background-color: #fff;
+    z-index: 4;
+    display: flex;
+    justify-content: space-between;
+}
+.modify-table button{
+    padding: 4px 7px;
+    color: #ffffff;
+    background-color: #F89191;
+    border: none;
+}
+.user-details{
+    display: flex;
+    column-gap: 5px;
+}
+.user-details img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+
+}
+.user-details p{
+    margin: 0px;
+}
+table{
+    text-align: left;
+    width: 100%;
+    white-space: nowrap;
+    
+}
+table th{
+    padding: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+table td{
+    padding: 10px;
+    font-size: 14x;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+table tr:hover{
+    background-color: #FFF4F4;
+}
+.email-id{
+    opacity: 0.6;
+}
+table button{
+    padding: 3px 12px;
+    color: #599E87;
+    background-color: #E7F4E8;
+    border: none;
+}
+table, th, td {
+    border-width:1px 0px;
+    border-color: rgb(189, 187, 187);
+    border-style:solid;
+    border-collapse: collapse;
+}
+.sort-icon{
+    padding-left: 8px;
+    cursor: pointer;
+}
+.table-heading{
+    background-color: rgb(247 247 247);
+    position: sticky;
+    top: 0px;
+}
+.employee-info {
+    position: relative;
+    box-shadow: 0px 0px 4px rgb(212, 200, 200);
+    width: 100%;
+    overflow: scroll;
+    margin-top: 10px;
+    height: calc(100vh - 243px);
+   
+}
+.employee-info::-webkit-scrollbar {
+    display: none;
+}
+.user-width{
+    width: 270px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.floating-div{
+    position: absolute;
+    right: 3%;
+    background-color: #ebebeb;
+    width: 11%;
+    text-align: center;
+    display:none;
+}
+.floating-div p{
+    cursor: pointer;
+}
+.dots-image{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1244px){
+    .modify-table{
+        column-gap: 879px;
+        overflow: scroll;
+        scroll-behavior: smooth;
+        width: 975px;
+    }
+    
+}
+
+
+@media screen and (max-width:1149px){
+    .filter li{
+        width: 7px;
+    }
+    .search-box{
+        width: 55%;
+    }
+    .admin-details{
+        width: 18%;
+    }
+}
+@media screen and (max-width:1080px){
+    .employee-content{
+        width: 260px;
+    }
+    .filter ul {
+        justify-content: left;
+        row-gap: 10px;
+    }
+    
+}
+
+@media screen and (max-width:1006px) {
+    .admin-details{
+        width: 23%;
+    }
+    .search-box {
+        width: 43%;
+    }
+    
+}
+
+@media screen and (max-width:834px) {
+    .admin-details {
+        width: 29%;
+    }
+    .export-btn{
+        margin-right: 0px;
+        width: 98px;
+        font-size: 11px;
+        border: 1px solid;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        padding-left: 14px;
+    }
+    .filter li{
+        width: 14px;
+        height: 15px;
+    }
+    .add-btn {
+        width: 162px;
+        font-size: 11px;
+        height: 28px;
+        box-shadow: 0px 0px 10px #928a8a;
+        display: inline-flex;
+        padding: 20px 20px 22px 25px;
+        align-items: center;
+    }
+    .employee-content {
+        width: 179px;
+    }
+    
+    .content {
+        font-size: 11px;
+    }
+    .filter{
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:772px) {
+
+   .admin-img {
+    width: 25px;
+    }
+
+    .admin-name {
+        font-size: 10px;
+    }
+
+    .side-arrow-user{
+        margin-left: 15px;
+    }
+    .designation{
+        font-size: 11px;
+    }
+    .search-icon{
+        width: 15px;
+    }
+    .language-icon{
+        width: 25px;
+    }
+    .dashboard-icon{
+        width: 15px;
+    }
+    .mode-icon{
+        width: 27px;
+    }
+    .notifications-icon{
+        width: 31px;
+    }
+    .export-btn {
+        width: 92px;
+        font-size: 9px;
+        padding-left: 14px;
+        height: 28px;
+    }
+    .add-btn {
+        width: 141px;
+        font-size: 9px;
+        height: 28px;
+        padding: 15px 15px 15px 19px;
+    }
+    .filter-search select {
+        padding: 8px 5px;
+        font-size: 10px;
+    }
+    .filter-search span {
+        
+        margin-right: 0px;
+        font-size: 13px;
+    }
+    .filter-search button {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    .filter-search img{
+        width: 10px;
+    }
+    table, th, td {
+        font-size: 13px;
+    }
+
+}
+@media screen and (max-width:660px) {
+   .filter li{
+    width: 7px;
+    height: 12px;
+   }
+   .search-box{
+    width: 70%;
+   }
+   .filter-search select,button{
+    margin-top: 5px;
+   }
+   .admin-details{
+    width: 49%;
+   }
+   .container{
+    height: 100vh;
+    overflow: scroll;
+   }
+   .tezo-logo{
+    z-index: 12;
+   }
+   .export-addemployee{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    justify-content: center;
+   }
+   .admin-details p{
+    display: none;
+   }
+   .admin-details{
+    width: 15%;
+   }
+   .down-arrow{
+    width: 12px;
+   }
+
+}
+@media screen and (max-width:503px) {
+   .vertical-nav{
+    padding: 8px;
+   }
+   .filter a {
+    text-decoration: none;
+    color: #919DAC;
+    position: relative;
+    bottom: 92%;
+    font-size: 9px;
+   }
+   .filter li{
+    width: 5px;
+    height: 8px;
+   }
+}
+@media screen and (max-width:430px) {
+    .content{
+        font-size: 8px;
+    }
+    .add-btn {
+        width: 110px;
+        font-size: 8px;
+        height: 28px;
+        padding: 10px 10px 10px 10px;
+    }
+    
+    .export-btn {
+        width: 76px;
+        font-size: 9px;
+        padding-left: 7px;
+        height: 21px;
+    }
+    
+    .export-btn img {
+        padding-right: 8px;
+        width: 12px;
+    }
+    
+    .add-btn img {
+        padding-right: 8px;
+        width: 12px;
+    }
+    
+}

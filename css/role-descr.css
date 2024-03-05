@@ -1,0 +1,224 @@
+.features{
+    column-gap: 5px;
+}
+
+.employee-btn{
+    text-decoration: none;
+    color: #000;
+}
+.role-descr-btn{
+    text-decoration: none;
+    color: #000;
+}
+.add-roles{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+}
+.roles{
+    background-color:#FDE6E6 ;
+    color: #F44848;
+}
+.roles-btn{
+    text-decoration: none;
+    color: black;
+    
+}
+.roles::after{
+
+    content: "";
+    background-color: #F44848;
+    width: 3px;
+    height: 41px;
+    position: absolute;
+    right: -13px;
+    border-radius: 2px 0px 0px 2px;
+}
+.add-roles{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+}
+.add-btn {
+    padding: 12px 12px 12px 17px;
+    width: 175px;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 5px;
+    background-color: #F44848;
+    border: none;
+    height: 40px;
+    box-shadow: 0px 0px 10px #ede5e5;
+    display: inline-flex;
+    cursor: pointer;
+}
+.add-btn img{
+    padding-right: 8px;
+    width: 15px;
+}
+.content {
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.side-arrow-icon {
+    rotate: 270deg;
+    width: 12px;
+    margin: 0px 12px;
+}
+.role-descr{
+    margin-top: 15px;
+}
+.role-descr strong{
+    font-size: 17px;
+}
+.person1{
+    width: 36px;
+    border-radius: 50px;
+    height: 36px;
+}
+.m-0{
+    margin: 0px;
+}
+.emp-details{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.emp-card{
+    width: 29%;
+    padding: 20px;
+    border: 1px solid rgb(212, 207, 207);
+    min-width: 300px;
+
+}
+.alignment {
+    display: inline-flex;
+    padding-top: 4px;
+    width: 100%;
+    align-items: center;
+}
+.alignment p{
+    opacity: 0.6;
+}
+.emp-work-info {
+    margin-left: 5px;
+    margin-right: 6px;
+}
+.description-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    row-gap: 10px;
+    font-size: 14px;
+    margin-top: 12px;
+    column-gap: 1%;
+    
+}
+.m-8{
+    margin: 8px;
+}
+.align-right{
+    text-align: right;
+    opacity: 0.6;
+    cursor: pointer;
+}
+.emp-role-name{
+    color: #444343;
+}
+
+@media screen and (max-width:1156px) {
+    .admin-details{
+        width: 23%;
+    }
+    .search-box {
+        width: 43%;
+    }
+    
+}
+
+@media screen and (max-width:856px) {
+    .admin-details{
+        width: 30%;
+    }
+    .search-box {
+        width: 35%;
+    }
+}
+@media screen and (max-width:765px) {
+    .admin-details{
+        width: 32%;
+    }
+    .search-box {
+        width: 33%;
+    }
+    .admin-img {
+        width: 25px;
+        }
+    
+        .admin-name {
+            font-size: 10px;
+        }
+    
+        
+        .designation{
+            font-size: 11px;
+        }
+        .search-icon{
+            width: 15px;
+        }
+        .language-icon{
+            width: 25px;
+        }
+        .dashboard-icon{
+            width: 15px;
+        }
+        .mode-icon{
+            width: 27px;
+        }
+        .notifications-icon{
+            width: 31px;
+        }
+}
+@media screen and (max-width:526px) {
+    .admin-details p{
+        display: none;
+    }
+    .admin-details{
+        width: 15%;
+    }
+    .down-arrow{
+        width: 12px;
+    }
+  
+}
+
+@media screen and (max-width:475px) {
+    .add-btn {
+        padding: 15px 12px 12px 12px;
+        width: 110px;
+        font-size: 8px;
+        height: 35px;
+    }
+    .add-btn img {
+        padding-right: 5px;
+        width: 9px;
+    }
+    .emp-card {
+        padding: 5px;
+    }
+  
+}
+@media screen and (max-width:420px) {
+    
+    .emp-card {
+        min-width: 220px;
+    }
+    .add-roles {
+        
+        flex-wrap: wrap;
+    }
+  
+}

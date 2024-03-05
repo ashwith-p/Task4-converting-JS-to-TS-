@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/add_employee.css">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="horizantal-content">
+        <nav class="horizantal-nav">
+            <img src="images/tezosymbol.png" alt="tezosybol" class="brand-icon"/>
+            <img src="images/TezoLogo.svg" alt="TezoLogo" class="brand-logo"/>
+            <img src="images/handle.png" alt="Handle" class="handle" onclick="toggleSideBar()"/> 
+            <p class="horizantal-nav-description">ALL</p>
+            <div class="dashboard features">
+                <img src="images/Dashboard.svg" alt="DashboardLogo" class="horizontal-logos">
+                <p class="horizantal-nav-names">Dashboard</p>
+            </div>
+            <a href="employees.html" class="remove-decoration"><div class="employees features">
+                <img src="images/Employees.svg" alt="EmployeesLogo" class="horizontal-logos">
+                <p class="horizantal-nav-names">Employees</p>
+            </div></a>
+            <p class="roles-or-user-management horizantal-nav-description" >ROLE/USER MANAGEMENT</p>
+            <a href="roles.html" class="roles-btn"><div class="roles features">
+                <img src="images/Roles.svg" alt="RolesLogo" class="horizontal-logos">
+                <p  class="horizantal-nav-names">Roles<img src="images/side_arrow.svg" alt="side_arrow" class="side-arrow-roles"/></p>
+                
+            </div></a>
+            <div class="assign-user features">
+                <img src="images/assign user.svg" alt="assign-userLogo" class="horizontal-logos">
+                <p  class="horizantal-nav-names">Access rights<img src="images/side_arrow.svg" alt="side_arrow" class="side-arrow-user"/></p>
+                
+            </div>
+        </nav>
+        <div class="install-update">
+            <p class="horizantal-nav-names update-text">Install new Update 2.3.1A</p>
+            <p class="horizantal-nav-names">Aloow to launch the new update for the AD application</p>
+            <button class="dismiss-btn">Dismiss</button>
+            <button class="accept-btn">Accept</button>
+        </div>
+    </div>
+    <div class="container">
+     
+        <nav class="vertical-nav">
+            <img src="images/bx-search.png" alt="Search" />
+            <input type="text" placeholder="Search" class="search-box">
+            <img src="images/Language.svg" alt="Language" class="clr-img language-icon"/>
+            <img src="images/Dashboard.svg" alt="Language" class="clr-img dashboard-icon"/>
+            <img src="images/Mode.svg" alt="Language" class="clr-img mode-icon"/>
+            <img src="images/Notifications.svg" alt="Language" class="clr-img notifications-icon"/>
+            <div class="admin-details">
+                <img src="images/Active-status-1.png" alt="Active-status-1" class="admin-img">
+                <div>
+                <p class="admin-name">Jhon Abraham</p>
+                <p><b>Admin</b></p>
+                </div>
+                <img src="images/side_arrow.svg" alt="down_arrow" class="down-arrow">
+            </div>
+        </nav>
+        <p class="heading">Add Employee</p>
+        <section class="add-employee">
+            <div class="profile-img">
+                <img src="images/user-profile.jpg" alt="user-profile">
+                <p class="m-0">Edit</p>
+            </div>
+            <form id="employee-details" >
+                <div class="personal-info">
+                <h3>Personal Information</h3>
+                <div class="display-flex" id="emp-no">
+                <label for="Emp-no">Emp No</label>
+                <input type="text" placeholder="Text" onfocus="checkDuplicate(this)" onblur="checkDuplicate(this)" class="employee-number">
+                </div>
+                <div class="basic-info">
+                    <div class="display-flex" id="first-name">
+                        <label for="FirstName">First Name</label>
+                        <input type="text" placeholder="Text" onfocus="border_change(this)" onblur="border_change(this)" class="first-name">
+                    </div>
+                    <div class="display-flex " id="last-name">
+                        <label for="LastName">Last Name</label>
+                        <input type="text" placeholder="Text" onfocus="border_change(this)" onblur="border_change(this)" class="last-name">
+                    </div>
+                    <div class="display-flex" id="date-of-birth">
+                        <label for="Date of Birth">Date of Birth</label>
+                        <input type="text" onfocus="border_type_change(this)" onblur="checkABove18(this)" placeholder="&#128197; Select" class="date-of-birth" >
+                    </div>
+                </div>
+                <div class="basic-info">
+                    <div class="display-flex" id="email-id">
+                        <label for="email">Email Id</label>
+                        <input type="email" placeholder="Jeo.j@technovert.com" onfocus="border_change(this)" onblur="border_change(this)" class="email-id">
+                    </div>
+                    <div  id="mobile-number" class="display-flex">
+                        <label for="mobileNo">Mobile Number</label>
+                        <input type="text" placeholder="0000000000" onfocus="border_change(this)" onblur="border_change(this)" class="mobile-no" pattern="[6789][0-9]{9}" title="10 digits" />
+                    </div>
+                </div>
+                </div>
+                
+                <div class="employee-info">
+                <h3>Employement Information</h3>
+                <div class="basic-info">
+                    <div class="display-flex" id="joining-date">
+                        <label for="joiningDate">Joining Date</label>
+                        <input type="date" onfocus="border_change(this)" onblur="border_change(this)" class="joining-date" >
+                    </div>
+                    <div class="display-flex">
+                        <label for="Location">Location</label>
+                        <select onfocus="border_change(this)" onblur="border_change(this)" class="location">
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Mumbai">Mumbai</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic-info">
+                    <div class="display-flex">
+                        <label for="Job Title">Job Title</label>
+                        <select onfocus="border_change(this)" onblur="border_change(this)" class="job-title">
+                            <option value="none" selected disabled hidden>select</option>
+                            
+                        </select>
+                    </div>
+                    <div class="display-flex">
+                        <label for="Department">Department</label>
+                        <select onfocus="border_change(this)" onblur="border_change(this)" class="department">
+                            <option value="none" selected disabled hidden>select</option>
+                            <option value="Product Engg.">Product Engineering</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="Quality Analyst">Quality Analyst</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="basic-info">
+                    <div class="display-flex">
+                        <label for="Assign Manager">Assign Manager</label>
+                        <select onfocus="border_change(this)" onblur="border_change(this)" class="assign-manager">
+                            <option value="none" selected disabled hidden>select</option>
+                            <option value="Ramesh">Ramesh</option>
+                            <option value="Suresh">Suresh</option>
+                            <option value="Dinesh">Dinesh</option>
+                        </select>
+                    </div>
+                    <div class="display-flex">
+                        <label for="Assign project">Assign project</label>
+                        <select onfocus="border_change(this)" onblur="border_change(this)" class="assign-project">
+                            <option value="none" selected disabled hidden>select</option>
+                            <option value="App Development">App Development</option>
+                            <option value="Health Care">Health Care</option>
+                            <option value="Banking">Banking</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+                <div class="buttons">
+                    <input type="button" value="Cancel" class="cancel-btn" onclick="closeAll()">
+                    <input type="submit" value="Add Employee" class="add-btn">
+                </div>
+            </form>
+
+        </section>
+    </div>
+    <!-- <script src="js/common.js"></script>
+    <script src="js/addEmployee.js"></script> -->
+    <script src="js/addEmployee.js"></script>
+    <script src="js/common.js"></script>
+   
+</body>
+</html>
