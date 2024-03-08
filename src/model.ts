@@ -1,5 +1,3 @@
-import { keyBasedIndexing } from "./addEmployee.js";
-
 export class employeeDetails implements keyBasedIndexing {
     public status: string = "";
     public empNo: string = "";
@@ -54,4 +52,8 @@ export class RoleInformation{
         this.assignEmployees=obj["assign-employees"];
         this.employeesList=selectedEmployeesList;
     }
+}
+
+export interface keyBasedIndexing {
+    [index: string]: string;
 }

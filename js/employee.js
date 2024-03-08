@@ -3,12 +3,6 @@ if (!localStorage.getItem('data')) {
     var myObject = [];
     localStorage.setItem('data', JSON.stringify(myObject));
 }
-var sortBy;
-(function (sortBy) {
-    sortBy["asec"] = "asec";
-    sortBy["desc"] = "desc";
-})(sortBy || (sortBy = {}));
-;
 export class EmployeeOperations {
     employeesList = JSON.parse(localStorage.getItem('data')); //change name to employeesList
     cureentEmployeeList = this.employeesList.slice(); //change name
@@ -18,86 +12,90 @@ export class EmployeeOperations {
     previous;
     alphabetFilter = false;
     constructor() {
+        this.printEmployeesTable(this.employeesList);
+        this.createAplhabetFilter();
     }
     tableStructure(element) {
         var table = document.querySelector(".employee-table");
-        var row = table.insertRow(-1);
-        // First td
-        var checkBox = row.insertCell(0); //change name
-        var inputElement = document.createElement("input");
-        inputElement.setAttribute("type", "checkbox");
-        inputElement.setAttribute('class', "check-selected");
-        checkBox.appendChild(inputElement);
-        //Second td
-        var useDetails = row.insertCell(1);
-        var path = "images/person1.jpg";
-        var userNameMail = document.createElement("div");
-        userNameMail.setAttribute("class", 'user-details user-width');
-        var userImage = document.createElement("img");
-        userImage.setAttribute('src', path);
-        userImage.setAttribute('alt', 'person1');
-        var userInfo = document.createElement("div");
-        var userName = document.createElement("p");
-        userName.setAttribute("class", "employee-name");
-        var textnode = document.createTextNode(element.firstName + ' ' + element.lastName);
-        userName.appendChild(textnode);
-        var userMail = document.createElement("p");
-        userMail.setAttribute("class", "email-id");
-        var textnode = document.createTextNode(element.emailId);
-        userMail.appendChild(textnode);
-        userInfo.appendChild(userName);
-        userInfo.appendChild(userMail);
-        userNameMail.appendChild(userImage);
-        userNameMail.appendChild(userInfo);
-        useDetails.appendChild(userNameMail);
-        //Third td
-        var employeeLocation = row.insertCell(2);
-        employeeLocation.innerHTML = element.location;
-        //Fourth cell
-        var employeeDepartment = row.insertCell(3);
-        employeeDepartment.innerHTML = element.department;
-        //Fifth cell
-        var employeeRole = row.insertCell(4);
-        employeeRole.innerHTML = element.jobTitle;
-        //Sixth cell
-        var employeeNum = row.insertCell(5);
-        employeeNum.innerHTML = element.empNo;
-        //Seventh cell
-        var employeeStatus = row.insertCell(6);
-        var statusBtn = document.createElement("button");
-        statusBtn.setAttribute("class", "status-btn");
-        var textnode = document.createTextNode(element.status);
-        statusBtn.appendChild(textnode);
-        employeeStatus.appendChild(statusBtn);
-        //Eight cell
-        var joiningDate = row.insertCell(7);
-        joiningDate.innerHTML = element.joiningDate;
-        //Ninth cell
-        var modifyDetails = row.insertCell(8);
-        var elipsisImage = document.createElement("img");
-        elipsisImage.setAttribute("src", "images/ellipsis-solid.svg");
-        elipsisImage.setAttribute("alt", "3-dots image");
-        var div = document.createElement("div");
-        div.setAttribute('class', 'floating-div');
-        var p = document.createElement("p");
-        var data1 = document.createTextNode("View Details");
-        p.setAttribute("class", "edit-option");
-        p.appendChild(data1);
-        div.appendChild(p);
-        var p = document.createElement("p");
-        p.setAttribute("class", "edit-option");
-        var data1 = document.createTextNode("Edit");
-        p.appendChild(data1);
-        div.appendChild(p);
-        var p = document.createElement("p");
-        var data1 = document.createTextNode("Delete");
-        p.setAttribute("class", "edit-option");
-        p.appendChild(data1);
-        div.appendChild(p);
-        elipsisImage.setAttribute("width", "15px");
-        elipsisImage.setAttribute("class", "dots-image");
-        modifyDetails.appendChild(elipsisImage);
-        modifyDetails.appendChild(div);
+        if (table) {
+            var row = table.insertRow(-1);
+            // First td
+            var checkBox = row.insertCell(0); //change name
+            var inputElement = document.createElement("input");
+            inputElement.setAttribute("type", "checkbox");
+            inputElement.setAttribute('class', "check-selected");
+            checkBox.appendChild(inputElement);
+            //Second td
+            var useDetails = row.insertCell(1);
+            var path = "images/person1.jpg";
+            var userNameMail = document.createElement("div");
+            userNameMail.setAttribute("class", 'user-details user-width');
+            var userImage = document.createElement("img");
+            userImage.setAttribute('src', path);
+            userImage.setAttribute('alt', 'person1');
+            var userInfo = document.createElement("div");
+            var userName = document.createElement("p");
+            userName.setAttribute("class", "employee-name");
+            var textnode = document.createTextNode(element.firstName + ' ' + element.lastName);
+            userName.appendChild(textnode);
+            var userMail = document.createElement("p");
+            userMail.setAttribute("class", "email-id");
+            var textnode = document.createTextNode(element.emailId);
+            userMail.appendChild(textnode);
+            userInfo.appendChild(userName);
+            userInfo.appendChild(userMail);
+            userNameMail.appendChild(userImage);
+            userNameMail.appendChild(userInfo);
+            useDetails.appendChild(userNameMail);
+            //Third td
+            var employeeLocation = row.insertCell(2);
+            employeeLocation.innerHTML = element.location;
+            //Fourth cell
+            var employeeDepartment = row.insertCell(3);
+            employeeDepartment.innerHTML = element.department;
+            //Fifth cell
+            var employeeRole = row.insertCell(4);
+            employeeRole.innerHTML = element.jobTitle;
+            //Sixth cell
+            var employeeNum = row.insertCell(5);
+            employeeNum.innerHTML = element.empNo;
+            //Seventh cell
+            var employeeStatus = row.insertCell(6);
+            var statusBtn = document.createElement("button");
+            statusBtn.setAttribute("class", "status-btn");
+            var textnode = document.createTextNode(element.status);
+            statusBtn.appendChild(textnode);
+            employeeStatus.appendChild(statusBtn);
+            //Eight cell
+            var joiningDate = row.insertCell(7);
+            joiningDate.innerHTML = element.joiningDate;
+            //Ninth cell
+            var modifyDetails = row.insertCell(8);
+            var elipsisImage = document.createElement("img");
+            elipsisImage.setAttribute("src", "images/ellipsis-solid.svg");
+            elipsisImage.setAttribute("alt", "3-dots image");
+            var div = document.createElement("div");
+            div.setAttribute('class', 'floating-div');
+            var p = document.createElement("p");
+            var data1 = document.createTextNode("View Details");
+            p.setAttribute("class", "edit-option");
+            p.appendChild(data1);
+            div.appendChild(p);
+            var p = document.createElement("p");
+            p.setAttribute("class", "edit-option");
+            var data1 = document.createTextNode("Edit");
+            p.appendChild(data1);
+            div.appendChild(p);
+            var p = document.createElement("p");
+            var data1 = document.createTextNode("Delete");
+            p.setAttribute("class", "edit-option");
+            p.appendChild(data1);
+            div.appendChild(p);
+            elipsisImage.setAttribute("width", "15px");
+            elipsisImage.setAttribute("class", "dots-image");
+            modifyDetails.appendChild(elipsisImage);
+            modifyDetails.appendChild(div);
+        }
     }
     printEmployeesTable(data) {
         data.forEach(element => this.tableStructure(element));
@@ -347,14 +345,16 @@ export class EmployeeOperations {
     }
     createAplhabetFilter() {
         var ul = document.getElementById('create-li');
-        for (var i = 65; i <= 90; i++) {
-            var li = document.createElement("li");
-            var a = document.createElement('a');
-            a.setAttribute("href", '#');
-            var char = document.createTextNode(String.fromCharCode(i));
-            a.appendChild(char);
-            li.appendChild(a);
-            ul.appendChild(li);
+        if (ul) {
+            for (var i = 65; i <= 90; i++) {
+                var li = document.createElement("li");
+                var a = document.createElement('a');
+                a.setAttribute("href", '#');
+                var char = document.createTextNode(String.fromCharCode(i));
+                a.appendChild(char);
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
         }
     }
     editOptions(className) {
@@ -391,7 +391,6 @@ export class EmployeeOperations {
 }
 if (document.URL.includes('employees.html')) {
     var object = new EmployeeOperations();
-    window.onload = () => { object.printEmployeesTable(object.employeesList); object.createAplhabetFilter(); };
     document.addEventListener('click', function (e) {
         var targetName = e.target.nodeName;
         if (e.target.tagName == 'LI') {
