@@ -14,7 +14,7 @@
         <nav class="horizantal-nav">
             <img src="images/tezosymbol.png" alt="tezosybol" class="brand-icon"/>
             <img src="images/TezoLogo.svg" alt="TezoLogo" class="brand-logo"/>
-            <img src="images/handle.png" alt="Handle" class="handle" onclick="toggleSideBar()"/>
+            <img src="images/handle.png" alt="Handle" class="handle" />
             <p class="horizantal-nav-description">ALL</p>
             <div class="dashboard features">
                 <img src="images/Dashboard.svg" alt="DashboardLogo" class="horizontal-logos">
@@ -68,12 +68,12 @@
                     <p class="content">Find all of your company's employee accounts and their associated roles</p>
                 </div>
                 <div class="export-addemployee">
-                    <button class="export-btn" onclick="exportData()"><img src="images/Export.svg" alt="Export-img">EXPORT</button>
+                    <button class="export-btn"><img src="images/Export.svg" alt="Export-img">EXPORT</button>
                     <button class="add-btn"  onclick="window.location.href = 'add-employee.html'"><img src="images/Add.svg" alt="add-img">ADD EMPLOYEE</button>
                 </div>
             </div>
             <div class="filter">
-                <img src="images/temp.svg" alt="filter-img" id="filter-icon" onclick="removeFilter()">
+                <img src="images/temp.svg" alt="filter-img" id="filter-icon">
                 <div class="drop-down-menu"> 
                     <select name="drop-down" id="drop-down-list">       <!--remove option. Get from the javascript-->
                     </select>
@@ -86,19 +86,19 @@
                 <div>
                 <span>Filter</span>
                 <img src="images/bars-filter.svg" alt="bars-filter" width="15px">
-                <select id="status" onchange="activateButton('apply-btn')">
+                <select id="status" >
                     <option value="none"  selected disabled hidden>Status</option>
                     <option value="Active">Active</option>
                     <option value="Deactive">Deactive</option>
                     
                 </select>
-                <select id="location" onchange="activateButton('apply-btn')">
+                <select id="location" >
                     <option value="none"  selected disabled hidden>Location</option>
                     <option value="Hyderabad">Hyderabad</option>
                     <option value="Chennai">Chennai</option>
                     <option value="Mumbai">Mumbai</option>
                 </select>
-                <select id="dept" onchange="activateButton('apply-btn')">
+                <select id="dept">
                     <option value="none"  selected disabled hidden>Department</option>
                     <option value="Product Engg.">Product Engg</option>
                     <option value="UI/UX">UI/UX</option>
@@ -106,34 +106,34 @@
                 </select>
                 </div>
                 <div>
-                <button class="reset-btn" onClick="resetFiltersOnEmployees()">Reset</button>
-                <button class="apply-btn" onClick="applyFilterOnEmployees()">Apply</button>
+                <button class="reset-btn">Reset</button>
+                <button class="apply-btn" >Apply</button>
                 </div>
             </div>
             <div class="employee-info">
                 <div class="modify-table">
                     <div class="del-btn"><img src="images/arrow-turn left -down.svg" alt="let-down-arrow" class="left-down-arrow"/>
-                    <button id="delete-btn" onclick="deleteRows()">Delete</button></div>
+                    <button id="delete-btn" >Delete</button></div>
                     <img src="images/table-add.svg" alt="Add table" class="add-table-img">
                 </div>
                 <table class="employee-table">
                     <tr class="table-heading">
-                        <th><input type="checkbox" class="checkbox-btn" onclick="selectCheckedRows(this)"></th>
-                        <th class="user-width">USER <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('firstName')"/></th>
-                        <th>LOCATION<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('location')"/></th>
-                        <th style="width: 150px;">DEPARTMRNT<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('department')"/></th>
-                        <th style="width: 120px;">ROLE<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('jobTitle')"/></th>
-                        <th style="width: 100px;">EMP NO <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('empNo')"/></th>
-                        <th style="width: 80px;">STATUS <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('status')"></th>
-                        <th style="width: 120px;">JOIN DT<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" onclick="sortDataByColumn('joiningDate')"/></th>
+                        <th><input type="checkbox" class="checkbox-btn" ></th>
+                        <th class="user-width">USER <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="firstName"/></th>
+                        <th>LOCATION<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="location" /></th>
+                        <th style="width: 150px;">DEPARTMRNT<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="department" /></th>
+                        <th style="width: 120px;">ROLE<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="jobTitle" /></th>
+                        <th style="width: 100px;">EMP NO <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="empNo" /></th>
+                        <th style="width: 80px;">STATUS <img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="status" ></th>
+                        <th style="width: 120px;">JOIN DT<img src="images/sort-solid.svg" alt="Sort icon" width="5px" class="sort-icon" id="joiningDate"/></th>
                         <th><img src="images/ellipsis-solid.svg" alt="ellipsis" width="15px"/></th>
                     </tr>
                 </table>
             </div>
         </section>
     </div>
-    <script  src="js/common.js" ></script>
-    <script  src="js/employee.js" ></script>
+    <script  src="js/common.js" type="module"></script>
+    <script  src="js/employee.js" type="module"></script>
     
     
 </body>

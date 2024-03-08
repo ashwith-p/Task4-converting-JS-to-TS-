@@ -98,6 +98,7 @@
 }
 .filter li:hover{
     background-color: #F44848;
+    cursor: pointer;
     a{
         color: white;
     }

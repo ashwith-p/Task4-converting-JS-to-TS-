@@ -13,7 +13,7 @@
         <nav class="horizantal-nav">
             <img src="images/tezosymbol.png" alt="tezosybol" class="brand-icon"/>
             <img src="images/TezoLogo.svg" alt="TezoLogo" class="brand-logo"/>
-            <img src="images/handle.png" alt="Handle" class="handle" onclick="toggleSideBar()"/> 
+            <img src="images/handle.png" alt="Handle" class="handle"/> 
             <p class="horizantal-nav-description">ALL</p>
             <div class="dashboard features">
                 <img src="images/Dashboard.svg" alt="DashboardLogo" class="horizontal-logos">
@@ -71,30 +71,30 @@
                 <h3>Personal Information</h3>
                 <div class="display-flex" id="emp-no">
                 <label for="Emp-no">Emp No</label>
-                <input type="text" placeholder="Text" onfocus="checkDuplicate(this)" onblur="checkDuplicate(this)" class="employee-number">
+                <input type="text" placeholder="Text" class="employee-number" >
                 </div>
                 <div class="basic-info">
                     <div class="display-flex" id="first-name">
                         <label for="FirstName">First Name</label>
-                        <input type="text" placeholder="Text" onfocus="border_change(this)" onblur="border_change(this)" class="first-name">
+                        <input type="text" placeholder="Text"  class="first-name">
                     </div>
                     <div class="display-flex " id="last-name">
                         <label for="LastName">Last Name</label>
-                        <input type="text" placeholder="Text" onfocus="border_change(this)" onblur="border_change(this)" class="last-name">
+                        <input type="text" placeholder="Text"  class="last-name">
                     </div>
                     <div class="display-flex" id="date-of-birth">
                         <label for="Date of Birth">Date of Birth</label>
-                        <input type="text" onfocus="border_type_change(this)" onblur="checkABove18(this)" placeholder="&#128197; Select" class="date-of-birth" >
+                        <input type="text" placeholder="&#128197; Select" class="date-of-birth" >
                     </div>
                 </div>
                 <div class="basic-info">
                     <div class="display-flex" id="email-id">
                         <label for="email">Email Id</label>
-                        <input type="email" placeholder="Jeo.j@technovert.com" onfocus="border_change(this)" onblur="border_change(this)" class="email-id">
+                        <input type="email" placeholder="Jeo.j@technovert.com" class="email-id">
                     </div>
                     <div  id="mobile-number" class="display-flex">
                         <label for="mobileNo">Mobile Number</label>
-                        <input type="text" placeholder="0000000000" onfocus="border_change(this)" onblur="border_change(this)" class="mobile-no" pattern="[6789][0-9]{9}" title="10 digits" />
+                        <input type="text" placeholder="0000000000"  class="mobile-no" pattern="[6789][0-9]{9}" title="10 digits" />
                     </div>
                 </div>
                 </div>
@@ -104,11 +104,11 @@
                 <div class="basic-info">
                     <div class="display-flex" id="joining-date">
                         <label for="joiningDate">Joining Date</label>
-                        <input type="date" onfocus="border_change(this)" onblur="border_change(this)" class="joining-date" >
+                        <input type="date"  class="joining-date" >
                     </div>
                     <div class="display-flex">
                         <label for="Location">Location</label>
-                        <select onfocus="border_change(this)" onblur="border_change(this)" class="location">
+                        <select  class="location">
                             <option value="Hyderabad">Hyderabad</option>
                             <option value="Chennai">Chennai</option>
                             <option value="Mumbai">Mumbai</option>
@@ -118,14 +118,14 @@
                 <div class="basic-info">
                     <div class="display-flex">
                         <label for="Job Title">Job Title</label>
-                        <select onfocus="border_change(this)" onblur="border_change(this)" class="job-title">
+                        <select  class="job-title">
                             <option value="none" selected disabled hidden>select</option>
                             
                         </select>
                     </div>
                     <div class="display-flex">
                         <label for="Department">Department</label>
-                        <select onfocus="border_change(this)" onblur="border_change(this)" class="department">
+                        <select  class="department">
                             <option value="none" selected disabled hidden>select</option>
                             <option value="Product Engg.">Product Engineering</option>
                             <option value="UI/UX">UI/UX</option>
@@ -136,7 +136,7 @@
                 <div class="basic-info">
                     <div class="display-flex">
                         <label for="Assign Manager">Assign Manager</label>
-                        <select onfocus="border_change(this)" onblur="border_change(this)" class="assign-manager">
+                        <select class="assign-manager">
                             <option value="none" selected disabled hidden>select</option>
                             <option value="Ramesh">Ramesh</option>
                             <option value="Suresh">Suresh</option>
@@ -145,7 +145,7 @@
                     </div>
                     <div class="display-flex">
                         <label for="Assign project">Assign project</label>
-                        <select onfocus="border_change(this)" onblur="border_change(this)" class="assign-project">
+                        <select  class="assign-project">
                             <option value="none" selected disabled hidden>select</option>
                             <option value="App Development">App Development</option>
                             <option value="Health Care">Health Care</option>
@@ -155,7 +155,7 @@
                 </div>
                 </div>
                 <div class="buttons">
-                    <input type="button" value="Cancel" class="cancel-btn" onclick="closeAll()">
+                    <input type="button" value="Cancel" class="cancel-btn">
                     <input type="submit" value="Add Employee" class="add-btn">
                 </div>
             </form>
@@ -164,8 +164,8 @@
     </div>
     <!-- <script src="js/common.js"></script>
     <script src="js/addEmployee.js"></script> -->
-    <script src="js/addEmployee.js"></script>
-    <script src="js/common.js"></script>
+    <script src="js/common.js" type="module"></script>
+    <script src="js/addEmployee.js" type="module"></script>
    
 </body>
 </html>

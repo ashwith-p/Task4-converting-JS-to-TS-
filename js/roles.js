@@ -1,5 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+import { EmployeeOperations } from "./employee.js";
+import { CommonOperations } from "./common.js";
+var employeeObject = new EmployeeOperations();
+new CommonOperations();
 function createRoleCard(ele) {
     var parent = document.createElement("div");
     parent.setAttribute("class", "role-card");
@@ -17,7 +19,7 @@ function createRoleCard(ele) {
     secretId.style.display = "none";
     child1 = document.createElement("img");
     child1.setAttribute("src", "images/edit.svg");
-    child1.setAttribute('onclick', 'editRoles(this)');
+    //child1.setAttribute('onclick','editRoles(this)');
     child1.setAttribute('id', 'edit-btn');
     roleDetails.appendChild(child);
     roleDetails.appendChild(secretId);
@@ -123,7 +125,7 @@ function createRoleCard(ele) {
     var hyperLink = document.createElement('a');
     // hyperLink.setAttribute("href","role-descr.html");
     hyperLink.setAttribute("class", "role-descr-btn");
-    hyperLink.setAttribute('onclick', 'roleEmployees(this)');
+    //hyperLink.setAttribute('onclick','roleEmployees(this)');
     var child2 = document.createElement("p");
     child2.setAttribute("class", "view-employee m-8");
     var text = document.createTextNode("View all employees");
@@ -146,16 +148,11 @@ function printTable(data) {
     }
 }
 function roleEmployees(className) {
-    var roleDetails = className.parentElement.firstChild;
+    var roleDetails = className.parentElement.parentElement.firstChild;
     var roleName = roleDetails.firstChild.firstChild.innerHTML;
     var roleId = roleDetails.children[1].innerHTML;
-    console.log(roleName);
     sessionStorage.setItem('role', JSON.stringify({ 'roleName': roleName, 'id': roleId }));
     window.location.href = 'role-descr.html';
-}
-function popColor() {
-    var apply = document.getElementsByClassName('apply-btn')[0];
-    apply.style.background = " #F44848";
 }
 function resetFilters() {
     deleteCards();
@@ -194,3 +191,20 @@ function editRoles(className) {
     sessionStorage.setItem("roleDetails", JSON.stringify({ 'roleName': roleName }));
     window.location.href = 'addRoles.html';
 }
+document.addEventListener('change', function () {
+    employeeObject.activateButton('apply-btn');
+});
+document.addEventListener('click', function (e) {
+    if (e.target.className == 'apply-btn') {
+        applyFilter();
+    }
+    if (e.target.className == 'reset-btn') {
+        resetFilters();
+    }
+    if (e.target.id == 'edit-btn') {
+        editRoles(e.target);
+    }
+    if (e.target.className == 'view-employee m-8') {
+        roleEmployees(e.target);
+    }
+});

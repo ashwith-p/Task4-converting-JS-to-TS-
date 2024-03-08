@@ -1,6 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+import { CommonOperations } from "./common.js";
 intitializer();
+new CommonOperations();
 var currentId;
 function createCard(ele) {
     var section = document.getElementsByClassName("description-section")[0];
@@ -85,7 +85,7 @@ function createCard(ele) {
     //
     var p = document.createElement("p");
     p.setAttribute("class", "m-8 align-right");
-    p.setAttribute("onclick", "viewDetails(this)");
+    //p.setAttribute("onclick","viewDetails(this)");
     var data = document.createTextNode("View All");
     p.appendChild(data);
     var img = document.createElement("img");
@@ -97,10 +97,9 @@ function createCard(ele) {
 function intitializer() {
     var employeesList = JSON.parse(sessionStorage.getItem('role'));
     var roleList = JSON.parse(localStorage.getItem("roleData"));
-    //remove
     currentId = employeesList.id;
     var empList = [];
-    var x = employeesList.roleName;
+    var x = employeesList.roleName; //change variable name--x
     for (var i = 0; i < roleList.length; i++) {
         if (roleList[i].designation == x) {
             empList = roleList[i].employeesList;
@@ -123,3 +122,11 @@ function addEmployee() {
     sessionStorage.setItem('roleId', JSON.stringify({ "roleId": currentId }));
     window.location.href = 'add-employee.html';
 }
+document.addEventListener('click', function (e) {
+    if (e.target.className == 'add-btn') {
+        addEmployee();
+    }
+    if (e.target.className == "m-8 align-right") {
+        viewDetails(e.target);
+    }
+});

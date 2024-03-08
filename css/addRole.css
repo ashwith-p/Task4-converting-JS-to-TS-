@@ -54,6 +54,9 @@ label{
     outline: none;
     border: 1px solid grey;
 }
+.display-flex input:focus{
+    border: 2px solid rgb(0, 126, 252) ;
+}
 select{
     width: 200px;
     padding: 6px;
@@ -61,9 +64,15 @@ select{
     background-color: #f9f9f9;
     border: none;
 }
+select:focus{
+    border: 2px solid rgb(0, 126, 252) ;
+}
 textarea{
     padding: 6px;
     outline: none;
+}
+textarea:focus{
+    border: 2px solid rgb(0, 126, 252) ;
 }
 
 .buttons{

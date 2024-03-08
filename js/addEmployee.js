@@ -1,10 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.employeeDetails = void 0;
-const common_1 = require("./common");
-if (!(0, common_1.getLocalStorage)('data')) {
+import { CommonOperations } from "./common.js";
+import { employeeDetails } from "./model.js";
+var CommonOperationsObject = new CommonOperations();
+if (!CommonOperationsObject.getLocalStorage('data')) {
     var myObject = [];
-    (0, common_1.setLocalStorage)('data', myObject);
+    CommonOperationsObject.setLocalStorage('data', myObject);
 }
 var checkBorder = false;
 var isFormValid = true;
@@ -13,7 +12,7 @@ if (sessionStorage.getItem('updateDetails')) {
     var viewOrEdit = JSON.parse(sessionStorage.getItem('updateDetails'));
 }
 var roleId;
-var roleData = (0, common_1.getLocalStorage)('roleData');
+var roleData = CommonOperationsObject.getLocalStorage('roleData');
 var role;
 var roleInfo;
 var currentRoles = [];
@@ -24,7 +23,7 @@ var classNameMapProperty = {
     'lastName': 'last-name',
     'dateOfBirth': 'date-of-birth',
     'emailId': 'email-id',
-    "mobieNo": 'mobile-no',
+    "mobileNo": 'mobile-no',
     'joiningDate': 'joining-date',
     "location": 'location',
     'jobTitle': 'job-title',
@@ -32,43 +31,10 @@ var classNameMapProperty = {
     'assignManager': 'assign-manager',
     'assignProject': 'assign-project'
 };
-class employeeDetails {
-    constructor(employeeObject, status) {
-        this.status = "";
-        this.empNo = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.dateOfBirth = "";
-        this.emailId = "";
-        this.mobileNo = "";
-        this.joiningDate = "";
-        this.location = "";
-        this.jobTitle = "";
-        this.department = "";
-        this.assignManager = "";
-        this.assignProject = "";
-        if (employeeObject) {
-            this.empNo = employeeObject['empNo'];
-            this.assignManager = employeeObject['assignManager'];
-            this.assignProject = employeeObject['assignProject'];
-            this.location = employeeObject['location'];
-            this.lastName = employeeObject['lastName'];
-            this.firstName = employeeObject['firstName'];
-            this.dateOfBirth = employeeObject['dateOfBirth'];
-            this.department = employeeObject['department'];
-            this.mobileNo = employeeObject['mobileNo'];
-            this.emailId = employeeObject['emailId'];
-            this.joiningDate = employeeObject['joiningDate'];
-            this.jobTitle = employeeObject['jobTitle'];
-            this.status = status;
-        }
-    }
-}
-exports.employeeDetails = employeeDetails;
 employeeInitialize();
 function employeeInitialize() {
     validDates();
-    var details = (0, common_1.getLocalStorage)('data');
+    var details = CommonOperationsObject.getLocalStorage('data');
     roleId = JSON.parse(sessionStorage.getItem('roleId'));
     if (roleData) {
         var selectRole = document.getElementsByClassName('job-title')[0];
@@ -156,13 +122,12 @@ function validDates() {
     joiningDate.setAttribute("min", formattedDate);
 }
 function checkDuplicate(className) {
-    (0, common_1.border_change)(className);
-    var dataInLocalStorage = (0, common_1.getLocalStorage)('data');
+    var dataInLocalStorage = CommonOperationsObject.getLocalStorage('data');
     if (dataInLocalStorage.length) {
         for (var j = 0; j < dataInLocalStorage.length; j++) {
-            if (dataInLocalStorage[j].empNo == className.nodeValue) {
+            if (dataInLocalStorage[j].empNo == className.value) {
                 isFormValid = false;
-                (className.parentElement).appendChild((0, common_1.createErrorMessage)("Eployee No. Already Exists"));
+                (className.parentElement).appendChild(CommonOperationsObject.createErrorMessage("Eployee No. Already Exists"));
                 break;
             }
         }
@@ -181,7 +146,7 @@ function border_type_change(className) {
         className.style.padding = "6px";
         checkBorder = false;
     }
-    (0, common_1.removeErrorMessage)(className);
+    CommonOperationsObject.removeErrorMessage(className);
 }
 function validateDetails() {
     var form = document.getElementById("employee-details");
@@ -195,7 +160,7 @@ function validateDetails() {
             if (a.length == 0) {
                 element.style.border = "2px solid red";
                 parentId = parent.id;
-                document.getElementById(parentId).appendChild((0, common_1.createErrorMessage)("This field is required"));
+                document.getElementById(parentId).appendChild(CommonOperationsObject.createErrorMessage("This field is required"));
             }
         }
     }
@@ -241,17 +206,17 @@ function validateDetails() {
                             }
                         }
                     });
-                    (0, common_1.setLocalStorage)('roleData', roleData);
-                    (0, common_1.setLocalStorage)('data', cureentEmployeeList);
+                    CommonOperationsObject.setLocalStorage('roleData', roleData);
+                    CommonOperationsObject.setLocalStorage('data', cureentEmployeeList);
                 }
             }
-            var data = (0, common_1.getLocalStorage)('data');
+            var data = CommonOperationsObject.getLocalStorage('data');
             data.push(obj);
-            (0, common_1.setLocalStorage)('data', data);
+            CommonOperationsObject.setLocalStorage('data', data);
             if (roleInfo) {
                 role.employeesList.push(obj);
                 currentRoles.push(role);
-                (0, common_1.setLocalStorage)('roleData', currentRoles);
+                CommonOperationsObject.setLocalStorage('roleData', currentRoles);
                 ;
                 sessionStorage.removeItem('roleId');
                 window.location.href = "roles.html";
@@ -270,7 +235,7 @@ function checkABove18(className) {
     var currentDate = new Date();
     if (!(currentDate.getFullYear() - birthDate.getFullYear() >= 18)) {
         isFormValid = false;
-        (className.parentElement).appendChild((0, common_1.createErrorMessage)("Age is less than 18"));
+        (className.parentElement).appendChild(CommonOperationsObject.createErrorMessage("Age is less than 18"));
     }
 }
 document.getElementById('employee-details').addEventListener('submit', function (e) {
@@ -287,3 +252,23 @@ function closeAll() {
         sessionStorage.removeItem('updateDetails');
     }
 }
+(document.getElementsByClassName('employee-number'))[0].addEventListener('blur', function (e) {
+    checkDuplicate(e.target);
+});
+(document.getElementsByClassName('date-of-birth'))[0].addEventListener('focus', function (e) {
+    border_type_change(e.target);
+});
+(document.getElementsByClassName('date-of-birth'))[0].addEventListener('blur', function (e) {
+    checkABove18(e.target);
+});
+document.addEventListener('click', function (e) {
+    if (e.target.tagName == "INPUT" || e.target.tagName == "SELECT") {
+        CommonOperationsObject.removeErrorMessage(e.target);
+    }
+    if (e.target.className == 'cancel-btn') {
+        closeAll();
+    }
+    if ((e.target).className == 'handle') {
+        CommonOperationsObject.toggleSideBar();
+    }
+});

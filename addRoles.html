@@ -67,11 +67,11 @@
             <div class="basic-info">
                 <div class="display-flex">
                     <label for="RoleName">Role Name</label>
-                    <input type="text" placeholder="Text" id="designation" onfocus="border_change(this)" onblur="findDuplicateRoles(this)">
+                    <input type="text" placeholder="Text" id="designation" >
                 </div>
                 <div class="display-flex">
                     <label for="Department">Department</label>
-                    <select  id="role-department" onfocus="border_change(this)" onblur="border_change(this)">
+                    <select  id="role-department">
                         <option value="none" selected disabled hidden>Select</option>
                         <option value="Product Engg.">Product Engineering</option>
                         <option value="UI/UX">UI/UX</option>
@@ -81,20 +81,20 @@
             </div>
             <div class="display-flex">
                 <label for="description">Description</label>
-                <textarea  rows="10" placeholder="Text" id="description" onfocus="border_change(this)" onblur="border_change(this)"></textarea>
+                <textarea  rows="10" placeholder="Text" id="description"></textarea>
             </div>
             <div class="display-flex">
                 <label for="Location">Location</label>
-                        <select id="role-location" onfocus="border_change(this)" onblur="border_change(this)">
+                        <select id="role-location" >
                             <option value="none" selected disabled hidden>Select</option>
                             <option value="Hyderabad">Hyderabad</option>
                             <option value="Chennai">Chennai</option>
                             <option value="Mumbai">Mumbai</option>
                         </select>
             </div>
-            <div class="display-flex"  onfocus="border_change(this)" onblur="border_change(this)">
+            <div class="display-flex" >
                 <label for="Assign Employees">Assign Employees</label>
-                <input type="text" placeholder="Search for an Employee" id="assign-employees" onkeyup="filterByNames()">
+                <input type="text" placeholder="Search for an Employee" id="assign-employees" >
             
             <div id="display-column">
             
@@ -107,11 +107,11 @@
     </div>
         <div class="buttons">
             <input type="button" value="Cancel" class="cancel-btn" onclick="{location.reload();window.location.href='roles.html'}" >
-            <input type="button"  value="Add Role" class="add-btn" onclick="validateRole()">
+            <input type="button"  value="Add Role" class="add-btn" >
         </div>
         </div>
-        <script src="js/common.js" ></script>
-        <script src="js/addRoles.js"></script>
+        <script src="js/common.js" type="module" ></script>
+        <script src="js/addRoles.js" type="module"></script>
         
 </body>
 </html>

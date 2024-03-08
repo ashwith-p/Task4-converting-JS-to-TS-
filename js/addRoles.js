@@ -1,32 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.RoleInformation = void 0;
-const common_1 = require("./common");
-var cureentEmployeeList = (0, common_1.getLocalStorage)('data');
-if (!(0, common_1.getLocalStorage)('roleData').length) {
+import { CommonOperations } from "./common.js";
+import { RoleInformation } from "./model.js";
+var commonobj = new CommonOperations();
+var cureentEmployeeList = commonobj.getLocalStorage('data');
+if (!commonobj.getLocalStorage('roleData').length) {
     var roleData = [];
-    (0, common_1.setLocalStorage)('roleData', roleData);
+    commonobj.setLocalStorage('roleData', roleData);
     ;
 }
-class RoleInformation {
-    constructor(obj, checkedList) {
-        this.id = obj['id'];
-        this.designation = obj["designation"];
-        this.roleDepartment = obj["role-department"];
-        this.description = obj["description"];
-        this.roleLocation = obj["role-location"];
-        this.assignEmployees = obj["assign-employees"];
-        this.employeesList = checkedList;
-    }
-}
-exports.RoleInformation = RoleInformation;
 var roleExists = false;
 var obj = {};
 var editedData = {
     'isEdited': false,
     'cureentEmployeeList': {}
 };
-var checkedList = []; //name
+var selectedEmployeesList = []; //name
 initialize();
 function initialize() {
     var roleDetails = JSON.parse(sessionStorage.getItem('roleDetails'));
@@ -71,7 +58,7 @@ function validateRole() {
             var a = parent.getElementsByTagName("span");
             if (a.length == 0) {
                 element.style.border = "2px solid red";
-                parent.appendChild((0, common_1.createErrorMessage)("This field is required"));
+                parent.appendChild(commonobj.createErrorMessage("This field is required"));
             }
         }
         else {
@@ -82,9 +69,9 @@ function validateRole() {
     if (!roleExists) {
         obj['id'] = Date.now().toString(); //generate Role Id dynamically
         if (!hasEmptyField) {
-            var employeeInRole = getEmployeeDetails(checkedList);
+            var employeeInRole = getEmployeeDetails(selectedEmployeesList);
             var role = new RoleInformation(obj, employeeInRole);
-            for (var j = 0; j < checkedList.length; j++) {
+            for (var j = 0; j < selectedEmployeesList.length; j++) {
                 for (var i = 0; i < cureentEmployeeList.length; i++) {
                     if (cureentEmployeeList[i].empNo == employeeInRole[j].empNo) {
                         cureentEmployeeList[i].jobTitle = role.designation;
@@ -97,7 +84,7 @@ function validateRole() {
                 localStorage.setItem('roleData', JSON.stringify(editedData['cureentEmployeeList']));
             }
             localStorage.setItem('data', JSON.stringify(cureentEmployeeList));
-            checkedList = [];
+            selectedEmployeesList = [];
             var roleData = JSON.parse(localStorage.getItem('roleData'));
             roleData.push(role);
             localStorage.setItem("roleData", JSON.stringify(roleData));
@@ -134,11 +121,12 @@ function displayEmployeesToAssign(ele, checkStatus = false) {
     roleEmployeeDivision.appendChild(name);
     var inputElement = document.createElement("input");
     inputElement.setAttribute("type", "checkbox");
+    inputElement.setAttribute('class', "checkClicked");
     if (checkStatus) {
-        checkedList.push(ele.empNo);
+        selectedEmployeesList.push(ele.empNo);
         inputElement.setAttribute("checked", "");
     }
-    inputElement.setAttribute('onchange', "addEmployeeToRole(this, '" + ele.empNo + "')");
+    //inputElement.setAttribute('onchange',"addEmployeeToRole(this, '" + ele.empNo + "')");
     var employeeList = document.createElement("div");
     employeeList.setAttribute("class", "employee-list");
     var list = document.getElementById("display-column");
@@ -153,7 +141,7 @@ function filterByNames() {
         cureentEmployeeList = JSON.parse(localStorage.getItem('data'));
         for (var j = 0; j < cureentEmployeeList.length; j++) {
             if ((cureentEmployeeList[j].firstName.toLowerCase().includes(searhFilter) || cureentEmployeeList[j].empNo.includes(searhFilter)) &&
-                checkedList.indexOf(cureentEmployeeList[j].empNo) == -1) {
+                selectedEmployeesList.indexOf(cureentEmployeeList[j].empNo) == -1) {
                 displayEmployeesToAssign(cureentEmployeeList[j]);
             }
         }
@@ -161,17 +149,17 @@ function filterByNames() {
 }
 function addEmployeeToRole(className, empNo) {
     if (className.checked) {
-        checkedList.push(empNo);
+        selectedEmployeesList.push(empNo);
     }
     else {
-        if (checkedList.indexOf(empNo) != -1) {
-            checkedList.splice(checkedList.indexOf(empNo), 1);
+        if (selectedEmployeesList.indexOf(empNo) != -1) {
+            selectedEmployeesList.splice(selectedEmployeesList.indexOf(empNo), 1);
         }
     }
 }
-function getEmployeeDetails(checkedList) {
+function getEmployeeDetails(selectedEmployeesList) {
     var list = [];
-    checkedList.forEach(ele => {
+    selectedEmployeesList.forEach(ele => {
         for (var j = 0; j < cureentEmployeeList.length; j++) {
             if (ele == cureentEmployeeList[j].empNo) {
                 list.push(cureentEmployeeList[j]);
@@ -181,14 +169,36 @@ function getEmployeeDetails(checkedList) {
     return list;
 }
 function findDuplicateRoles(className) {
-    (0, common_1.border_change)(className);
+    commonobj.border_change(className);
     var name = document.getElementById('designation').value;
     name = name.replace(" ", "");
     var roleData = JSON.parse(localStorage.getItem('roleData'));
     roleData.forEach((ele) => {
         if (name.toLowerCase() == (ele.designation).replace(" ", "").toLowerCase()) {
-            document.getElementById('designation').parentElement.appendChild((0, common_1.createErrorMessage)('Role Already Exista'));
+            document.getElementById('designation').parentElement.appendChild(commonobj.createErrorMessage('Role Already Exista'));
             roleExists = true;
         }
     });
 }
+document.getElementById('assign-employees').addEventListener('keyup', function () {
+    filterByNames();
+});
+document.getElementById('designation').addEventListener('blur', function (e) {
+    findDuplicateRoles(e.target);
+});
+document.getElementsByClassName('add-btn')[0].addEventListener('click', function () {
+    validateRole();
+});
+document.addEventListener("change", function (e) {
+    if (e.target.previousElementSibling?.children[1]) {
+        addEmployeeToRole(e.target, e.target.previousElementSibling.children[1].innerHTML.slice(0, 4));
+    }
+});
+document.addEventListener('click', function (e) {
+    if ((e.target).className == 'handle') {
+        new CommonOperations().toggleSideBar();
+    }
+    if (e.target.tagName == "INPUT" || e.target.tagName == "SELECT" || e.target.tagName == "TEXTAREA") {
+        new CommonOperations().removeErrorMessage(e.target);
+    }
+});

@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="css/roles.css">
         <link href="https://fonts.cdnfonts.com/css/helvetica-255" rel="stylesheet">
         <!-- <link rel="stylesheet" href="css/common.css"> -->
-        
                 
         <title>Tezo</title>
     </head>
@@ -16,7 +15,7 @@
             <nav class="horizantal-nav">
                 <img src="images/tezosymbol.png" alt="tezosybol" class="brand-icon"/>
                 <img src="images/TezoLogo.svg" alt="TezoLogo" class="brand-logo"/>
-                <img src="images/handle.png" alt="Handle" class="handle"  onclick="toggleSideBar()"/>
+                <img src="images/handle.png" alt="Handle" class="handle" />
                 <p class="horizantal-nav-description">ALL</p>
                 <div class="dashboard features">
                     <img src="images/Dashboard.svg" alt="DashboardLogo" class="horizontal-logos">
@@ -74,26 +73,26 @@
                 <div>
                 <span>Filter</span>
                 <img src="images/bars-filter.svg" alt="bars-filter" width="15px">
-                <select onchange="popColor()" id="role-location">
+                <select  id="role-location">
                     <option value="none"  selected disabled hidden>Location</option>
                     <option value="Hyderabad">Hyderabad</option>
                     <option value="Chennai">Chennai</option>
                     <option value="Mumbai">Mumbai</option>
                 </select>
-                <select onchange="popColor()" id="role-department">
+                <select id="role-department">
                     <option value="none"  selected disabled hidden>Department</option>
                     <option value="Product Engg.">Product Engg</option>
                     <option value="UI/UX">UI/UX</option>
                     <option value="Quality Analyst">Quality Analyst</option>
                 </select></div>
-                <div><button class="reset-btn" onclick="resetFilters()">Reset</button>
-                <button class="apply-btn" onclick="applyFilter()">Apply</button></div>
+                <div><button class="reset-btn" >Reset</button>
+                <button class="apply-btn">Apply</button></div>
             </div>
             <section class="roles-info">
             </section>
         </div>
-        <script src="js/common.js"></script>
-        <script src="js/roles.js"></script>
+        <!-- <script src="js/employee.js" type="module" defer></script> -->
+        <script src="./js/roles.js" type="module" defer></script>
         
 </body>
 </html>

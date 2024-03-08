@@ -1,6 +1,11 @@
-import { RoleInformation } from "./addRoles";
+import { RoleInformation } from "./model";
+import {EmployeeOperations} from "./employee.js";
+import { CommonOperations } from "./common.js";
 
-function createRoleCard(ele:RoleInformation)
+var employeeObject=new EmployeeOperations();
+new CommonOperations();
+
+function createRoleCard(ele:RoleInformation): void
 {
     var parent=document.createElement("div");
     parent.setAttribute("class","role-card");
@@ -18,7 +23,7 @@ function createRoleCard(ele:RoleInformation)
     secretId.style.display="none";
     (child1 as HTMLImageElement)=document.createElement("img");
     child1.setAttribute("src","images/edit.svg");
-    child1.setAttribute('onclick','editRoles(this)');
+    //child1.setAttribute('onclick','editRoles(this)');
     child1.setAttribute('id','edit-btn')
     roleDetails.appendChild(child);
     roleDetails.appendChild(secretId);
@@ -125,7 +130,7 @@ function createRoleCard(ele:RoleInformation)
     var hyperLink=document.createElement('a');
     // hyperLink.setAttribute("href","role-descr.html");
     hyperLink.setAttribute("class","role-descr-btn");
-    hyperLink.setAttribute('onclick','roleEmployees(this)');
+    //hyperLink.setAttribute('onclick','roleEmployees(this)');
     var child2=document.createElement("p");
     child2.setAttribute("class","view-employee m-8");
     var text=document.createTextNode("View all employees");
@@ -153,18 +158,11 @@ function printTable(data:RoleInformation[])
 }
 
 function roleEmployees(className:HTMLElement){
-    var roleDetails=className.parentElement!.firstChild! as HTMLElement;
+    var roleDetails=className.parentElement!.parentElement!.firstChild! as HTMLElement;
     var roleName=(roleDetails.firstChild!.firstChild! as HTMLElement).innerHTML;
     var roleId=(roleDetails.children[1]! as HTMLElement).innerHTML;
-    console.log(roleName);
     sessionStorage.setItem('role',JSON.stringify({'roleName':roleName,'id':roleId}));
     window.location.href='role-descr.html';
- }
-
- function popColor()
- {
-    var apply=document.getElementsByClassName('apply-btn')[0] as HTMLElement;
-    apply.style. background=" #F44848";
  }
 
  function resetFilters()
@@ -212,3 +210,22 @@ function roleEmployees(className:HTMLElement){
     sessionStorage.setItem("roleDetails",JSON.stringify({'roleName':roleName}));
     window.location.href='addRoles.html';
  }
+ document.addEventListener('change',function(){
+    employeeObject.activateButton('apply-btn');
+ })
+ document.addEventListener('click',function(e){
+    
+    if((e.target! as HTMLElement).className=='apply-btn'){
+        applyFilter();
+    }
+    if((e.target! as HTMLElement).className=='reset-btn'){
+        resetFilters();
+    }
+    if((e.target! as HTMLElement).id=='edit-btn'){
+        editRoles((e.target! as HTMLElement));
+    }
+    if((e.target! as HTMLElement).className=='view-employee m-8'){
+        roleEmployees((e.target! as HTMLElement));
+    }
+    
+ })
