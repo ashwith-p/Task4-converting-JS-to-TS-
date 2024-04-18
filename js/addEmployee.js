@@ -1,6 +1,7 @@
 import { CommonOperations } from "./common.js";
+import { fetchEmployee, pages, styles } from "./main.js";
 import { employeeDetails } from "./model.js";
-class AddEmployee {
+export class AddEmployee {
     checkBorder = false;
     isFormValid = true;
     cureentEmployeeList = [];
@@ -8,6 +9,12 @@ class AddEmployee {
     constructor() {
         if (sessionStorage.getItem('updateDetails')) {
             this.viewOrEdit = JSON.parse(sessionStorage.getItem('updateDetails'));
+        }
+        if (sessionStorage.getItem('roleId')) {
+            this.roleId = JSON.parse(sessionStorage.getItem('roleId'));
+        }
+        else {
+            this.roleId = undefined;
         }
         this.employeeInitialize();
     }
@@ -34,7 +41,6 @@ class AddEmployee {
     employeeInitialize() {
         this.validDates();
         var details = CommonOperationsObject.getLocalStorage('data');
-        this.roleId = JSON.parse(sessionStorage.getItem('roleId'));
         if (this.roleData) {
             var selectRole = document.getElementsByClassName('job-title')[0];
             this.roleData.forEach((rolename) => {
@@ -60,7 +66,7 @@ class AddEmployee {
             });
             for (var i in this.classNameMapProperty) {
                 var element = document.querySelector('.' + this.classNameMapProperty[i]);
-                if (i == 'joining-date') {
+                if (i == 'joiningDate') {
                     element.value = employee[i].split('-').reverse().join('-');
                 }
                 else {
@@ -70,14 +76,14 @@ class AddEmployee {
             if (this.viewOrEdit.functionality == 'View Details') {
                 document.getElementsByClassName('cancel-btn')[0].value = "close";
                 document.getElementsByClassName('heading')[0].innerHTML = "View Employee";
-                document.getElementsByClassName('add-btn')[0].style.display = "none";
+                document.getElementsByClassName('add-employee-btn')[0].style.display = "none";
                 for (var i in this.classNameMapProperty) {
                     document.querySelector('.' + this.classNameMapProperty[i]).setAttribute('disabled', "");
                 }
                 sessionStorage.removeItem('updateDetails');
             }
             else {
-                document.getElementsByClassName('add-btn')[0].nodeValue = "Edit employee";
+                document.getElementsByClassName('add-employee-btn')[0].value = "Edit employee";
                 document.getElementsByClassName('heading')[0].innerHTML = "Edit Employee";
             }
         }
@@ -218,10 +224,10 @@ class AddEmployee {
                     CommonOperationsObject.setLocalStorage('roleData', this.currentRoles);
                     ;
                     sessionStorage.removeItem('roleId');
-                    window.location.href = "roles.html";
+                    fetchEmployee(pages.roles, styles.roles);
                 }
                 alert("Date added successfully!!");
-                window.location.href = 'employees.html';
+                fetchEmployee(pages.employee, styles.employee);
             }
             else {
                 window.alert("Role, Location and Department combination is not valid");
@@ -230,7 +236,7 @@ class AddEmployee {
     }
     checkABove18(className) {
         this.border_type_change((className));
-        var birthDate = new Date(className.nodeValue);
+        var birthDate = new Date(className.value);
         var currentDate = new Date();
         if (!(currentDate.getFullYear() - birthDate.getFullYear() >= 18)) {
             this.isFormValid = false;
@@ -239,38 +245,9 @@ class AddEmployee {
     }
     closeAll() {
         sessionStorage.removeItem('roleId');
-        window.location.href = 'employees.html';
         if (sessionStorage.getItem('updateDetails')) {
             sessionStorage.removeItem('updateDetails');
         }
     }
 }
-var addEmployeeObject = new AddEmployee();
 var CommonOperationsObject = new CommonOperations();
-document.getElementById('employee-details').addEventListener('submit', function (e) {
-    e.preventDefault();
-    addEmployeeObject.validateDetails();
-    if (addEmployeeObject.isFormValid && addEmployeeObject.validCombination) {
-        window.location.href = 'employees.html';
-    }
-});
-(document.getElementsByClassName('employee-number'))[0].addEventListener('blur', function (e) {
-    addEmployeeObject.checkDuplicate(e.target);
-});
-(document.getElementsByClassName('date-of-birth'))[0].addEventListener('focus', function (e) {
-    addEmployeeObject.border_type_change(e.target);
-});
-(document.getElementsByClassName('date-of-birth'))[0].addEventListener('blur', function (e) {
-    addEmployeeObject.checkABove18(e.target);
-});
-document.addEventListener('click', function (e) {
-    if (e.target.tagName == "INPUT" || e.target.tagName == "SELECT") {
-        CommonOperationsObject.removeErrorMessage(e.target);
-    }
-    if (e.target.className == 'cancel-btn') {
-        addEmployeeObject.closeAll();
-    }
-    if ((e.target).className == 'handle') {
-        CommonOperationsObject.toggleSideBar();
-    }
-});

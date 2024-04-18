@@ -1,17 +1,18 @@
-import { CommonOperations } from "./common.js";
-if (!localStorage.getItem('data')) {
-    var myObject = [];
-    localStorage.setItem('data', JSON.stringify(myObject));
-}
+import { fetchEmployee, pages, styles } from "./main.js";
 export class EmployeeOperations {
-    employeesList = JSON.parse(localStorage.getItem('data')); //change name to employeesList
-    cureentEmployeeList = this.employeesList.slice(); //change name
-    //window.onload = (): void =>{this.printEmployeesTable(this.employeesList)};
+    employeesList;
+    cureentEmployeeList;
     alphabetEployeeData = [];
     appliedFilter = false;
     previous;
     alphabetFilter = false;
     constructor() {
+        if (!localStorage.getItem('data')) {
+            var myObject = [];
+            localStorage.setItem('data', JSON.stringify(myObject));
+        }
+        this.employeesList = JSON.parse(localStorage.getItem('data'));
+        this.cureentEmployeeList = this.employeesList.slice();
         this.printEmployeesTable(this.employeesList);
         this.createAplhabetFilter();
     }
@@ -20,7 +21,7 @@ export class EmployeeOperations {
         if (table) {
             var row = table.insertRow(-1);
             // First td
-            var checkBox = row.insertCell(0); //change name
+            var checkBox = row.insertCell(0);
             var inputElement = document.createElement("input");
             inputElement.setAttribute("type", "checkbox");
             inputElement.setAttribute('class', "check-selected");
@@ -112,11 +113,9 @@ export class EmployeeOperations {
         else {
             this.cureentEmployeeList = this.employeesList;
         }
-        //remove unwanted code
         if (!(dept == 'none' && loc == 'none' && status == 'none')) {
             this.deleteEmployees();
             for (var i = 0; i < this.cureentEmployeeList.length; i++) {
-                //remove unwanted variable declaration
                 if ((dept == this.cureentEmployeeList[i].department || dept == 'none') &&
                     (loc == this.cureentEmployeeList[i].location || loc == 'none') &&
                     (status == this.cureentEmployeeList[i].status || status == 'none')) {
@@ -303,31 +302,46 @@ export class EmployeeOperations {
         var inputs = table.getElementsByTagName("input");
         var roleData = JSON.parse(localStorage.getItem("roleData"));
         if (confirm("Are you sure.You want to Delete the data")) {
-            for (var i = 1; i < inputs.length; i++) {
-                if (inputs[i].checked) {
-                    var tr = inputs[i].parentElement.parentElement;
-                    var employeeNo = tr.childNodes[5].innerHTML;
-                    this.employeesList.forEach(ele => {
-                        if (ele.empNo == employeeNo) {
-                            var index = this.employeesList.indexOf(ele);
-                            if (index !== -1) {
-                                this.employeesList.splice(index, 1);
-                            }
-                            if (roleData != null) {
-                                roleData.forEach((role) => {
-                                    if (ele.jobTitle == role.designation) {
-                                        (role.employeesList).forEach((employee) => {
-                                            if (employee.empNo == ele.empNo) {
-                                                (role.employeesList).splice((role.employeesList).indexOf(employee), 1);
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                    });
+            inputs = (Array.from(inputs).filter((input) => {
+                if (input.checked) {
+                    return true;
                 }
-            }
+                else {
+                    return false;
+                }
+            }));
+            var employeeNoList = [];
+            Array.from(inputs).forEach(input => {
+                employeeNoList.push((input.parentElement.parentElement).childNodes[5].innerHTML);
+            });
+            employeeNoList.forEach(No => {
+                Array.from(this.employeesList).filter((ele) => {
+                    if (ele.empNo != No) {
+                        return ele;
+                    }
+                });
+            });
+            employeeNoList.forEach(No => {
+                Array.from(this.employeesList).filter((ele) => {
+                    if (ele.empNo == No) {
+                        var index = this.employeesList.indexOf(ele);
+                        if (index !== -1) {
+                            this.employeesList.splice(index, 1);
+                        }
+                        if (roleData != null) {
+                            roleData.forEach((role) => {
+                                if (ele.jobTitle == role.designation) {
+                                    role.employeesList = role.employeesList.filter(_ => {
+                                        if (_.empNo != ele.empNo) {
+                                            return ele.empNo;
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
             localStorage.setItem("data", JSON.stringify(this.employeesList));
             localStorage.setItem('roleData', JSON.stringify(roleData));
             this.deleteEmployees();
@@ -337,7 +351,7 @@ export class EmployeeOperations {
             }
         }
         else {
-            for (var i = 1; i < inputs.length; i++) {
+            for (var i = 0; i < inputs.length; i++) {
                 inputs[i].checked = false;
             }
         }
@@ -385,61 +399,7 @@ export class EmployeeOperations {
                 'isEdited': false
             };
             sessionStorage.setItem("updateDetails", JSON.stringify(obj));
-            window.location.href = 'add-employee.html';
+            fetchEmployee(pages.addEmployee, styles.addEmployee);
         }
     }
-}
-if (document.URL.includes('employees.html')) {
-    var object = new EmployeeOperations();
-    document.addEventListener('click', function (e) {
-        var targetName = e.target.nodeName;
-        if (e.target.tagName == 'LI') {
-            object.filterByAplhabet('filter', e.target);
-        }
-        else if (e.target.id == 'filter-icon') {
-            object.removeFilter();
-        }
-        else if (e.target.className == 'export-btn') {
-            object.exportData();
-        }
-        else if (e.target.className == 'apply-btn') {
-            object.applyFilterOnEmployees();
-        }
-        else if (e.target.className == 'reset-btn') {
-            object.resetFiltersOnEmployees();
-        }
-        else if (e.target.id == 'delete-btn') {
-            object.deleteRows();
-        }
-        else if (e.target.className == 'dots-image') {
-            object.editOptions(e.target);
-        }
-        else if (e.target.className == 'edit-option') {
-            object.editEmployee(e.target);
-        }
-        else if (e.target.className == 'sort-icon') {
-            object.sortDataByColumn(e.target.id);
-        }
-        else if ((e.target).className == 'handle') {
-            new CommonOperations().toggleSideBar();
-        }
-        else if (targetName != "IMG" && targetName != "P") {
-            if (object.previous) {
-                object.previous.style.display = 'none';
-                object.previous = null;
-            }
-        }
-    }, true);
-    document.addEventListener('change', function (e) {
-        if (e.target.id == 'status' || e.target.id == 'location'
-            || e.target.id == 'dept') {
-            object.activateButton('apply-btn');
-        }
-        else if (e.target.className == 'checkbox-btn') {
-            object.selectCheckedRows(e.target);
-        }
-        else if (e.target.className == 'check-selected') {
-            object.checkSelectedEmployees(e.target);
-        }
-    }, true);
 }

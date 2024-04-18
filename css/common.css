@@ -58,6 +58,7 @@ body{
     border-radius: 5px;
     position: relative;
     width: 170px;
+    cursor: pointer;
 }
 
 .brand-logo {
@@ -166,9 +167,6 @@ body{
 .toggle{
     width:75px;
 }
-/* .toggle .install-update{
-        display: none;
-    } */
 .toggle .horizantal-nav{
         width: 73%;
     }
@@ -183,13 +181,18 @@ body{
         padding: 0px;
         width: 46px;
     }
-/* .toggle .brand-logo{
-    display: none;
-} */
+
 .toggle .brand-icon{
     display: block;
     width: 45px;
 }
 .toggle .handle{
-    left:55px
+    left:55px;
+    rotate:180deg;
+}
+.toggle.side-arrow-roles{
+    display: none;
+}
+.toggle .side-arrow-user{
+    display: none;
 }

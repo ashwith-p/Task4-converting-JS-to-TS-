@@ -1,9 +1,9 @@
 import { CommonOperations} from "./common.js";
 import { employeeDetails,RoleInformation,keyBasedIndexing} from "./model.js";
-
+import { fetchEmployee,pages,styles } from "./main.js";
 
 var commonobj=new CommonOperations();
-class AddRoles{
+export class AddRoles{
     public cureentEmployeeList:employeeDetails[]=commonobj.getLocalStorage('data') as employeeDetails[];
     public roleData:RoleInformation[]=[];  
     public roleExists=false;
@@ -28,7 +28,7 @@ class AddRoles{
             var employeeData=JSON.parse(localStorage.getItem('data')!);
             if(roleDetails){
                 sessionStorage.removeItem('roleDetails');
-                (document.getElementsByClassName('add-btn')[0] as HTMLInputElement).value="Edit Role";
+                (document.getElementsByClassName('add-role-btn-addRole')[0] as HTMLInputElement).value="Edit Role";
                 rolesInfo.forEach((ele:RoleInformation)=>{
                 if(ele.designation==roleDetails.roleName){
                     employee=ele;
@@ -71,8 +71,8 @@ class AddRoles{
                 }
             }
             else{
-                var x=element.id;
-                this.obj[x]=element.value;
+                var elementValue=element.id;
+                this.obj[elementValue]=element.value;
             }
         }
         if(!this.roleExists){this.obj['id']=Date.now().toString();//generate Role Id dynamically
@@ -99,7 +99,8 @@ class AddRoles{
         var roleData=JSON.parse(localStorage.getItem('roleData')!);
         roleData.push(role);
         localStorage.setItem("roleData",JSON.stringify(roleData));
-        window.location.href='roles.html';}}
+        fetchEmployee(pages.roles,styles.roles);
+        }}
     }
 
     removeDeselectedEmployees(){
@@ -136,7 +137,6 @@ class AddRoles{
         if(checkStatus){
             this.selectedEmployeesList.push(ele.empNo);
             inputElement.setAttribute("checked","");}
-        //inputElement.setAttribute('onchange',"addEmployeeToRole(this, '" + ele.empNo + "')");
         var employeeList=document.createElement("div");
         employeeList.setAttribute("class","employee-list");
         var list=document.getElementById("display-column")!;
@@ -151,8 +151,8 @@ class AddRoles{
         if(searhFilter!=""){
             this.cureentEmployeeList=JSON.parse(localStorage.getItem('data')!);
             for(var j=0;j<this.cureentEmployeeList.length;j++){
-                if((this.cureentEmployeeList[j].firstName.toLowerCase().includes(searhFilter)|| this.cureentEmployeeList[j].empNo.includes(searhFilter)) &&
-                    this.selectedEmployeesList.indexOf(this.cureentEmployeeList[j].empNo)==-1){
+                if(((this.cureentEmployeeList[j].firstName.toLowerCase().includes(searhFilter)|| this.cureentEmployeeList[j].empNo.includes(searhFilter)) &&
+                    this.selectedEmployeesList.indexOf(this.cureentEmployeeList[j].empNo)==-1) && this.cureentEmployeeList[j].jobTitle==(document.getElementById("designation") as HTMLInputElement).value){
                     this.displayEmployeesToAssign(this.cureentEmployeeList[j]);
                 }
             }
@@ -198,27 +198,3 @@ class AddRoles{
 
     }
 }
-var addRolesObject=new AddRoles();
-document.getElementById('assign-employees')!.addEventListener('keyup',function(){
-    addRolesObject.filterByNames();
-})
-document.getElementById('designation')!.addEventListener('blur',function(e){
-    addRolesObject.findDuplicateRoles(e.target! as HTMLInputElement);
-})
-document.getElementsByClassName('add-btn')[0].addEventListener('click',function(){
-    addRolesObject.validateRole();
-});
-document.addEventListener("change",function(e){
-    if((e.target! as HTMLElement).previousElementSibling?.children[1]){
-        addRolesObject.addEmployeeToRole(e.target! as HTMLInputElement,(e.target! as HTMLElement).previousElementSibling!.children[1].innerHTML.slice(0,4))
-    }
-})
-document.addEventListener('click',function(e){
-    if(((e.target!) as HTMLElement).className=='handle'){
-        new CommonOperations().toggleSideBar();
-    }
-    if((e.target! as HTMLElement).tagName=="INPUT" || (e.target! as HTMLElement).tagName=="SELECT" || (e.target! as HTMLElement).tagName=="TEXTAREA" )
-    {
-        new CommonOperations().removeErrorMessage(e.target! as HTMLElement);
-    }
-})

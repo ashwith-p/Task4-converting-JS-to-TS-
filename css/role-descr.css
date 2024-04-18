@@ -41,7 +41,7 @@
     margin-top: 20px;
     align-items: center;
 }
-.add-btn {
+.add-roledesc-btn {
     padding: 12px 12px 12px 17px;
     width: 175px;
     font-size: 14px;
@@ -54,7 +54,7 @@
     display: inline-flex;
     cursor: pointer;
 }
-.add-btn img{
+.add-roledesc-btn img{
     padding-right: 8px;
     width: 15px;
 }
@@ -129,6 +129,10 @@
     color: #444343;
 }
 
+#back-to-roles{
+    cursor: pointer;
+}
+
 @media screen and (max-width:1156px) {
     .admin-details{
         width: 23%;
@@ -196,13 +200,13 @@
 }
 
 @media screen and (max-width:475px) {
-    .add-btn {
+    .add-roledesc-btn {
         padding: 15px 12px 12px 12px;
         width: 110px;
         font-size: 8px;
         height: 35px;
     }
-    .add-btn img {
+    .add-roledesc-btn img {
         padding-right: 5px;
         width: 9px;
     }

@@ -1,115 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/employee.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    
-    <title>Tezo</title>
-</head>
-<body>
-    <div class="horizantal-content">
-        <nav class="horizantal-nav">
-            <img src="images/tezosymbol.png" alt="tezosybol" class="brand-icon"/>
-            <img src="images/TezoLogo.svg" alt="TezoLogo" class="brand-logo"/>
-            <img src="images/handle.png" alt="Handle" class="handle" />
-            <p class="horizantal-nav-description">ALL</p>
-            <div class="dashboard features">
-                <img src="images/Dashboard.svg" alt="DashboardLogo" class="horizontal-logos">
-                <p class="horizantal-nav-names">Dashboard</p>
-            </div>
-            <div class="employees features">
-                <img src="images/Employees.svg" alt="EmployeesLogo" class="horizontal-logos">
-                <p class="horizantal-nav-names">Employees</p>
-            </div>
-            <p class="roles-or-user-management horizantal-nav-description" >ROLE/USER MANAGEMENT</p>
-            <a href="roles.html" class="roles-btn"><div class="roles features">
-                <img src="images/Roles.svg" alt="RolesLogo" class="horizontal-logos">
-                <p  class="horizantal-nav-names">Roles</p>
-                <img src="images/side_arrow.svg" alt="side_arrow" class="side-arrow-roles"/>
-            </div></a>
-            <div class="assign-user features">
-                <img src="images/assign user.svg" alt="assign-userLogo" class="horizontal-logos">
-                <p  class="horizantal-nav-names">Access rights</p>
-                <img src="images/side_arrow.svg" alt="side_arrow" class="side-arrow-user"/>
-            </div>
-        </nav>
-        <div class="install-update">
-            <p class="horizantal-nav-names update-text">Install new Update 2.3.1A</p>
-            <p class="horizantal-nav-names">Aloow to launch the new update for the AD application</p>
-            <button class="dismiss-btn">Dismiss</button>
-            <button class="accept-btn">Accept</button>
+<section id="html">
+    <div class="employees-add-export">
+        <div class="employee-content">
+            <p>Employees</p>
+            <p class="content">Find all of your company's employee accounts and their associated roles</p>
+        </div>
+        <div class="export-addemployee">
+            <button class="export-btn"><img src="images/Export.svg" alt="Export-img">EXPORT</button>
+            <button class="add-btn"  ><img src="images/Add.svg" alt="add-img">ADD EMPLOYEE</button>
         </div>
     </div>
-    <div class="container">
-       
-        <nav class="vertical-nav">
-            <img src="images/bx-search.png" alt="Search" class="search-icon" />
-            <input type="text" placeholder="Search" class="search-box">
-            <img src="images/Language.svg" alt="Language" class="clr-img language-icon"/>
-            <img src="images/Dashboard.svg" alt="Language" class="clr-img dashboard-icon" />
-            <img src="images/Mode.svg" alt="Language" class="clr-img mode-icon"/>
-            <img src="images/Notifications.svg" alt="Language" class="clr-img notifications-icon"/>
-            <div class="admin-details">
-                <img src="images/Active-status-1.png" alt="Active-status-1" class="admin-img">
-                <div>
-                <p class="admin-name">Jhon Abraham</p>
-                <p class="designation"><b>Admin</b></p>
-                </div>
-                <img src="images/side_arrow.svg" alt="down_arrow" class="down-arrow">
-            </div>
-        </nav>
-        <section id="html">
-            <div class="employees-add-export">
-                <div class="employee-content">
-                    <p>Employees</p>
-                    <p class="content">Find all of your company's employee accounts and their associated roles</p>
-                </div>
-                <div class="export-addemployee">
-                    <button class="export-btn"><img src="images/Export.svg" alt="Export-img">EXPORT</button>
-                    <button class="add-btn"  onclick="window.location.href = 'add-employee.html'"><img src="images/Add.svg" alt="add-img">ADD EMPLOYEE</button>
-                </div>
-            </div>
-            <div class="filter">
-                <img src="images/temp.svg" alt="filter-img" id="filter-icon">
-                <div class="drop-down-menu"> 
-                    <select name="drop-down" id="drop-down-list">       <!--remove option. Get from the javascript-->
-                    </select>
-                </div>
-                <ul id="create-li"> <!--remove-->
-               
-                </ul>
-            </div>
-            <div class="filter-search">
-                <div>
-                <span>Filter</span>
-                <img src="images/bars-filter.svg" alt="bars-filter" width="15px">
-                <select id="status" >
-                    <option value="none"  selected disabled hidden>Status</option>
-                    <option value="Active">Active</option>
-                    <option value="Deactive">Deactive</option>
-                    
+        <div class="filter">
+            <img src="images/temp.svg" alt="filter-img" id="filter-icon">
+            <div class="drop-down-menu"> 
+                <select name="drop-down" id="drop-down-list">       <!--remove option. Get from the javascript-->
                 </select>
-                <select id="location" >
-                    <option value="none"  selected disabled hidden>Location</option>
-                    <option value="Hyderabad">Hyderabad</option>
-                    <option value="Chennai">Chennai</option>
-                    <option value="Mumbai">Mumbai</option>
-                </select>
-                <select id="dept">
-                    <option value="none"  selected disabled hidden>Department</option>
-                    <option value="Product Engg.">Product Engg</option>
-                    <option value="UI/UX">UI/UX</option>
-                    <option value="Quality Analyst">Quality Analyst</option>
-                </select>
-                </div>
-                <div>
-                <button class="reset-btn">Reset</button>
-                <button class="apply-btn" >Apply</button>
-                </div>
             </div>
+            <ul id="create-li"> <!--remove-->
+            </ul>
+        </div>
+        <div class="filter-search">
+            <div>
+            <span>Filter</span>
+            <img src="images/bars-filter.svg" alt="bars-filter" width="15px">
+            <select id="status" >
+                <option value="none"  selected disabled hidden>Status</option>
+                <option value="Active">Active</option>
+                <option value="Deactive">Deactive</option>
+            </select>
+            <select id="location" >
+                <option value="none"  selected disabled hidden>Location</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Mumbai">Mumbai</option>
+            </select>
+            <select id="dept">
+                <option value="none"  selected disabled hidden>Department</option>
+                <option value="Product Engg.">Product Engg</option>
+                <option value="UI/UX">UI/UX</option>
+                <option value="Quality Analyst">Quality Analyst</option>
+            </select>
+        </div>
+        <div>
+            <button class="reset-btn">Reset</button>
+            <button class="apply-btn" >Apply</button>
+        </div>
+        </div>
             <div class="employee-info">
                 <div class="modify-table">
                     <div class="del-btn"><img src="images/arrow-turn left -down.svg" alt="let-down-arrow" class="left-down-arrow"/>
@@ -131,10 +66,3 @@
                 </table>
             </div>
         </section>
-    </div>
-    <script  src="js/common.js" type="module"></script>
-    <script  src="js/employee.js" type="module"></script>
-    
-    
-</body>
-</html>

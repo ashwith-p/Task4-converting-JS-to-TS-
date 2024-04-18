@@ -1,7 +1,7 @@
 import { CommonOperations } from "./common.js";
+import { fetchEmployee, pages, styles } from "./main.js";
 import { employeeDetails,RoleInformation,keyBasedIndexing } from "./model.js";
-
-class AddEmployee{
+export class AddEmployee{
     public checkBorder: boolean = false;
     public isFormValid = true;
     public cureentEmployeeList: employeeDetails[] = [];
@@ -10,6 +10,13 @@ class AddEmployee{
     {
         if (sessionStorage.getItem('updateDetails')) {
             this.viewOrEdit = JSON.parse(sessionStorage.getItem('updateDetails')!);
+        }
+        if(sessionStorage.getItem('roleId'))
+        {
+            this.roleId=JSON.parse(sessionStorage.getItem('roleId')!);
+        }
+        else{
+            this.roleId=undefined;
         }
         this.employeeInitialize();
     }
@@ -37,7 +44,6 @@ class AddEmployee{
     employeeInitialize() {
         this.validDates();
         var details = CommonOperationsObject.getLocalStorage('data') as employeeDetails[];
-        this.roleId = JSON.parse(sessionStorage.getItem('roleId')!);
         if (this.roleData) {
             var selectRole = document.getElementsByClassName('job-title')[0] as HTMLElement;
             this.roleData.forEach((rolename: RoleInformation) => {
@@ -63,7 +69,7 @@ class AddEmployee{
             });
             for (var i in this.classNameMapProperty) {
                 var element: HTMLInputElement = document.querySelector('.' + this.classNameMapProperty[i])!;
-                if (i == 'joining-date') {
+                if (i == 'joiningDate') {
                     element.value = employee[i].split('-').reverse().join('-');
                 }
                 else { element.value = employee[i]; }
@@ -72,14 +78,14 @@ class AddEmployee{
             if (this.viewOrEdit.functionality == 'View Details') {
                 (document.getElementsByClassName('cancel-btn')[0] as HTMLInputElement).value = "close";
                 document.getElementsByClassName('heading')[0].innerHTML = "View Employee";
-                (document.getElementsByClassName('add-btn')[0] as HTMLElement).style.display = "none";
+                (document.getElementsByClassName('add-employee-btn')[0] as HTMLElement).style.display = "none";
                 for (var i in this.classNameMapProperty) {
                     document.querySelector('.' + this.classNameMapProperty[i])!.setAttribute('disabled', "");
                 }
                 sessionStorage.removeItem('updateDetails');
             }
             else {
-                document.getElementsByClassName('add-btn')[0].nodeValue = "Edit employee";
+                (document.getElementsByClassName('add-employee-btn')[0] as HTMLInputElement).value = "Edit employee";
                 document.getElementsByClassName('heading')[0].innerHTML = "Edit Employee";
             }
 
@@ -230,12 +236,12 @@ class AddEmployee{
                     this.currentRoles.push(this.role!);
                     CommonOperationsObject.setLocalStorage('roleData', this.currentRoles);;
                     sessionStorage.removeItem('roleId');
-                    window.location.href = "roles.html";
+                    fetchEmployee(pages.roles,styles.roles);
 
                 }
 
                 alert("Date added successfully!!");
-                window.location.href = 'employees.html';
+                fetchEmployee(pages.employee,styles.employee);
 
 
             }
@@ -245,9 +251,9 @@ class AddEmployee{
         }
     }
 
-    checkABove18(className: HTMLElement) {
+    checkABove18(className: HTMLInputElement) {
         this.border_type_change((className) as HTMLInputElement);
-        var birthDate = new Date(className.nodeValue!);
+        var birthDate = new Date(className.value!);
         var currentDate = new Date();
         if (!(currentDate.getFullYear() - birthDate.getFullYear() >= 18)) {
             this.isFormValid = false;
@@ -257,41 +263,12 @@ class AddEmployee{
 
     closeAll() {
         sessionStorage.removeItem('roleId');
-        window.location.href = 'employees.html';
         if (sessionStorage.getItem('updateDetails')) {
             sessionStorage.removeItem('updateDetails');
         }
+        
+        
     }
 }
-var addEmployeeObject=new AddEmployee();
-var CommonOperationsObject = new CommonOperations();
+var CommonOperationsObject=new CommonOperations();
 
-document.getElementById('employee-details')!.addEventListener('submit', function (e) {
-    e.preventDefault();
-    addEmployeeObject.validateDetails();
-    if (addEmployeeObject.isFormValid && addEmployeeObject.validCombination) {
-        window.location.href = 'employees.html';
-    }
-});
-
-(document.getElementsByClassName('employee-number')!)[0].addEventListener('blur', function (e) {
-    addEmployeeObject.checkDuplicate(e.target! as HTMLInputElement);
-});
-(document.getElementsByClassName('date-of-birth')!)[0].addEventListener('focus', function (e) {
-    addEmployeeObject.border_type_change(e.target! as HTMLInputElement);
-});
-(document.getElementsByClassName('date-of-birth')!)[0].addEventListener('blur', function (e) {
-    addEmployeeObject.checkABove18(e.target! as HTMLElement);
-});
-document.addEventListener('click',function(e){
-    if((e.target! as HTMLElement).tagName=="INPUT" || (e.target! as HTMLElement).tagName=="SELECT")
-    {
-        CommonOperationsObject.removeErrorMessage(e.target! as HTMLElement);
-    }
-    if((e.target! as HTMLElement).className=='cancel-btn'){
-        addEmployeeObject.closeAll();
-    }
-    if(((e.target!) as HTMLElement).className=='handle'){
-        CommonOperationsObject.toggleSideBar();
-    }
-})

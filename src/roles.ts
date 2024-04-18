@@ -1,7 +1,5 @@
 import { RoleInformation } from "./model";
-import {EmployeeOperations} from "./employee.js";
-import { CommonOperations } from "./common.js";
- class Roles{
+export class Roles{
     createRoleCard(ele:RoleInformation): void
     {
         var parent=document.createElement("div");
@@ -20,8 +18,7 @@ import { CommonOperations } from "./common.js";
         secretId.style.display="none";
         (child1 as HTMLImageElement)=document.createElement("img");
         child1.setAttribute("src","images/edit.svg");
-        //child1.setAttribute('onclick','editRoles(this)');
-        child1.setAttribute('id','edit-btn')
+        child1.setAttribute('class','edit-btn')
         roleDetails.appendChild(child);
         roleDetails.appendChild(secretId);
         roleDetails.appendChild(child1);
@@ -124,26 +121,41 @@ import { CommonOperations } from "./common.js";
         roleDetails.appendChild(child1);
         parent.appendChild(roleDetails);
         //last element
-        var hyperLink=document.createElement('a');
-        // hyperLink.setAttribute("href","role-descr.html");
+        var hyperLink=document.createElement('div');
         hyperLink.setAttribute("class","role-descr-btn");
-        //hyperLink.setAttribute('onclick','roleEmployees(this)');
-        var child2=document.createElement("p");
-        child2.setAttribute("class","view-employee m-8");
+        var span1:HTMLSpanElement=document.createElement("span");
         var text=document.createTextNode("View all employees");
+        var span=document.createElement('span');
+        span.setAttribute("class","view-employee m-8");
         var img=document.createElement("img");
         img.setAttribute("src","images/Vector.svg");
-        child2.appendChild(text);
-        child2.appendChild(img);
-        hyperLink.appendChild(child2);
+        span1.appendChild(text);
+        span.appendChild(span1);
+        span.appendChild(img);
+        hyperLink.appendChild(span);
         parent.appendChild(hyperLink);
         //add to section
         var rolesInfo=document.getElementsByClassName("roles-info")[0];
         rolesInfo.appendChild(parent);
     }   
-    public EmployeesList:RoleInformation[]=JSON.parse(localStorage.getItem('roleData')!);
-    public cureentRolesList:RoleInformation[]=[...this.EmployeesList]
+    public EmployeesList:RoleInformation[] ;
+    public cureentRolesList:RoleInformation[] | undefined;
     constructor(){
+        if(localStorage.getItem('roleData'))
+        {
+            this.EmployeesList=JSON.parse(localStorage.getItem('roleData')!);
+        }
+        else{
+            localStorage.setItem('roleData',JSON.stringify([]));
+            this.EmployeesList=[];
+        }
+        if(this.EmployeesList.length==0)
+        {
+            this.cureentRolesList=[];
+        }
+        else{
+            this.cureentRolesList=[...this.EmployeesList];
+        }
         this.printTable(this.cureentRolesList);
     }
 
@@ -155,11 +167,11 @@ import { CommonOperations } from "./common.js";
     }
 
     roleEmployees(className:HTMLElement){
-        var roleDetails=className.parentElement!.parentElement!.firstChild! as HTMLElement;
+        var roleDetails=className.parentElement!.parentElement!.parentElement!.firstChild! as HTMLElement;
         var roleName=(roleDetails.firstChild!.firstChild! as HTMLElement).innerHTML;
         var roleId=(roleDetails.children[1]! as HTMLElement).innerHTML;
         sessionStorage.setItem('role',JSON.stringify({'roleName':roleName,'id':roleId}));
-        window.location.href='role-descr.html';
+        
     }
 
     resetFilters()
@@ -202,29 +214,7 @@ import { CommonOperations } from "./common.js";
     {
         var roleName=(className.parentElement!.firstChild!.firstChild! as HTMLElement).innerHTML;
         sessionStorage.setItem("roleDetails",JSON.stringify({'roleName':roleName}));
-        window.location.href='addRoles.html';
     }
 }
 
-var rolesObject=new Roles();
-var employeeObject=new EmployeeOperations();
-new CommonOperations();
-document.addEventListener('change',function(){
-    employeeObject.activateButton('apply-btn');
- })
-document.addEventListener('click',function(e){
-    
-    if((e.target! as HTMLElement).className=='apply-btn'){
-        rolesObject.applyFilter();
-    }
-    if((e.target! as HTMLElement).className=='reset-btn'){
-        rolesObject.resetFilters();
-    }
-    if((e.target! as HTMLElement).id=='edit-btn'){
-        rolesObject.editRoles((e.target! as HTMLElement));
-    }
-    if((e.target! as HTMLElement).className=='view-employee m-8'){
-        rolesObject.roleEmployees((e.target! as HTMLElement));
-    }
-    
-})
+

@@ -1,5 +1,4 @@
-import { CommonOperations } from "./common.js";
-class RoleDescription {
+export class RoleDescription {
     currentId;
     static addEmployee;
     static viewDetails;
@@ -8,7 +7,7 @@ class RoleDescription {
         var roleList = JSON.parse(localStorage.getItem("roleData"));
         this.currentId = employeesList.id;
         var empList = [];
-        var x = employeesList.roleName; //change variable name--x
+        var x = employeesList.roleName;
         for (var i = 0; i < roleList.length; i++) {
             if (roleList[i].designation == x) {
                 empList = roleList[i].employeesList;
@@ -34,7 +33,6 @@ class RoleDescription {
         para1.setAttribute("class", "m-0");
         var bold = document.createElement("b");
         var nameValue = ele.firstName + ' ' + ele.lastName;
-        //nameValue=nameValue.length > 12 ? nameValue.substring(0,12) + "..." :nameValue;
         var name = document.createTextNode(nameValue);
         bold.appendChild(name);
         para1.appendChild(bold);
@@ -101,7 +99,6 @@ class RoleDescription {
         //
         var p = document.createElement("p");
         p.setAttribute("class", "m-8 align-right");
-        //p.setAttribute("onclick","viewDetails(this)");
         var data = document.createTextNode("View All");
         p.appendChild(data);
         var img = document.createElement("img");
@@ -110,27 +107,15 @@ class RoleDescription {
         empCard.appendChild(p);
         section.appendChild(empCard);
     }
-    viewDetails(className) {
+    async viewDetails(className) {
         var employeeNo = className.parentElement.children[1].children[1].innerHTML;
         var obj = {
             'employeeNumber': employeeNo,
             'functionality': "View Details"
         };
         sessionStorage.setItem("updateDetails", JSON.stringify(obj));
-        window.location.href = 'add-employee.html';
     }
-    addEmployee() {
+    async addEmployee() {
         sessionStorage.setItem('roleId', JSON.stringify({ "roleId": this.currentId }));
-        window.location.href = 'add-employee.html';
     }
 }
-var roleObject = new RoleDescription();
-new CommonOperations();
-document.addEventListener('click', function (e) {
-    if (e.target.className == 'add-btn') {
-        roleObject.addEmployee();
-    }
-    if (e.target.className == "m-8 align-right") {
-        roleObject.viewDetails(e.target);
-    }
-});

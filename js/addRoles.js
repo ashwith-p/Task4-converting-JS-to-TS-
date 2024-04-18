@@ -1,7 +1,8 @@
 import { CommonOperations } from "./common.js";
 import { RoleInformation } from "./model.js";
+import { fetchEmployee, pages, styles } from "./main.js";
 var commonobj = new CommonOperations();
-class AddRoles {
+export class AddRoles {
     cureentEmployeeList = commonobj.getLocalStorage('data');
     roleData = [];
     roleExists = false;
@@ -25,7 +26,7 @@ class AddRoles {
         var employeeData = JSON.parse(localStorage.getItem('data'));
         if (roleDetails) {
             sessionStorage.removeItem('roleDetails');
-            document.getElementsByClassName('add-btn')[0].value = "Edit Role";
+            document.getElementsByClassName('add-role-btn-addRole')[0].value = "Edit Role";
             rolesInfo.forEach((ele) => {
                 if (ele.designation == roleDetails.roleName) {
                     employee = ele;
@@ -64,8 +65,8 @@ class AddRoles {
                 }
             }
             else {
-                var x = element.id;
-                this.obj[x] = element.value;
+                var elementValue = element.id;
+                this.obj[elementValue] = element.value;
             }
         }
         if (!this.roleExists) {
@@ -90,7 +91,7 @@ class AddRoles {
                 var roleData = JSON.parse(localStorage.getItem('roleData'));
                 roleData.push(role);
                 localStorage.setItem("roleData", JSON.stringify(roleData));
-                window.location.href = 'roles.html';
+                fetchEmployee(pages.roles, styles.roles);
             }
         }
     }
@@ -128,7 +129,6 @@ class AddRoles {
             this.selectedEmployeesList.push(ele.empNo);
             inputElement.setAttribute("checked", "");
         }
-        //inputElement.setAttribute('onchange',"addEmployeeToRole(this, '" + ele.empNo + "')");
         var employeeList = document.createElement("div");
         employeeList.setAttribute("class", "employee-list");
         var list = document.getElementById("display-column");
@@ -142,8 +142,8 @@ class AddRoles {
         if (searhFilter != "") {
             this.cureentEmployeeList = JSON.parse(localStorage.getItem('data'));
             for (var j = 0; j < this.cureentEmployeeList.length; j++) {
-                if ((this.cureentEmployeeList[j].firstName.toLowerCase().includes(searhFilter) || this.cureentEmployeeList[j].empNo.includes(searhFilter)) &&
-                    this.selectedEmployeesList.indexOf(this.cureentEmployeeList[j].empNo) == -1) {
+                if (((this.cureentEmployeeList[j].firstName.toLowerCase().includes(searhFilter) || this.cureentEmployeeList[j].empNo.includes(searhFilter)) &&
+                    this.selectedEmployeesList.indexOf(this.cureentEmployeeList[j].empNo) == -1) && this.cureentEmployeeList[j].jobTitle == document.getElementById("designation").value) {
                     this.displayEmployeesToAssign(this.cureentEmployeeList[j]);
                 }
             }
@@ -183,26 +183,3 @@ class AddRoles {
         });
     }
 }
-var addRolesObject = new AddRoles();
-document.getElementById('assign-employees').addEventListener('keyup', function () {
-    addRolesObject.filterByNames();
-});
-document.getElementById('designation').addEventListener('blur', function (e) {
-    addRolesObject.findDuplicateRoles(e.target);
-});
-document.getElementsByClassName('add-btn')[0].addEventListener('click', function () {
-    addRolesObject.validateRole();
-});
-document.addEventListener("change", function (e) {
-    if (e.target.previousElementSibling?.children[1]) {
-        addRolesObject.addEmployeeToRole(e.target, e.target.previousElementSibling.children[1].innerHTML.slice(0, 4));
-    }
-});
-document.addEventListener('click', function (e) {
-    if ((e.target).className == 'handle') {
-        new CommonOperations().toggleSideBar();
-    }
-    if (e.target.tagName == "INPUT" || e.target.tagName == "SELECT" || e.target.tagName == "TEXTAREA") {
-        new CommonOperations().removeErrorMessage(e.target);
-    }
-});

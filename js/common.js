@@ -12,18 +12,12 @@ export class CommonOperations {
         if (!this.isSidebarToggled) {
             this.toogleBtn.classList.add("toggle");
             this.changeName.innerHTML = "Role";
-            this.rotateButton.style.rotate = "180deg";
-            this.rotateButton.style.left = "55px";
-            this.removeArrowRole.style.display = "none";
-            this.removeArrowsUser.style.display = "none";
             if (!this.mobileView) {
                 this.reduceSidebarWidth.style.width = "calc(100% - 75px)";
             }
             else {
                 this.toogleBtn.style.position = "static";
                 this.reduceSidebarWidth.style.width = "calc(89% - 30px)";
-                //document.getElementsByClassName('container')[0].style.paddingLeft="92px";
-                this.rotateButton.style.left = "55px";
                 this.rotateButton.style.top = "2%";
             }
             this.isSidebarToggled = true;
@@ -42,7 +36,6 @@ export class CommonOperations {
                 this.rotateButton.style.zIndex = "12";
             }
             this.toogleBtn.classList.remove("toggle");
-            this.rotateButton.style.rotate = "0deg";
             this.isSidebarToggled = false;
         }
     }
@@ -71,10 +64,10 @@ export class CommonOperations {
         this.removeErrorMessage(className);
     }
     removeErrorMessage(className) {
-        const x = (className.parentNode);
-        var a = x.getElementsByTagName("span");
-        if (a.length > 0) {
-            a[0].remove();
+        const node = (className.parentNode);
+        var spanList = node.getElementsByTagName("span");
+        if (spanList.length > 0) {
+            spanList[0].remove();
         }
         className.style.border = "";
     }
@@ -102,8 +95,6 @@ window.onresize = function () {
         commonObject.mobileView = false;
     }
 };
-document.addEventListener('click', function (e) {
-    if ((e.target).className == 'handle') {
-        commonObject.toggleSideBar();
-    }
+document.querySelector('.handle').addEventListener('click', function () {
+    commonObject.toggleSideBar();
 });

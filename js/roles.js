@@ -1,6 +1,4 @@
-import { EmployeeOperations } from "./employee.js";
-import { CommonOperations } from "./common.js";
-class Roles {
+export class Roles {
     createRoleCard(ele) {
         var parent = document.createElement("div");
         parent.setAttribute("class", "role-card");
@@ -18,8 +16,7 @@ class Roles {
         secretId.style.display = "none";
         child1 = document.createElement("img");
         child1.setAttribute("src", "images/edit.svg");
-        //child1.setAttribute('onclick','editRoles(this)');
-        child1.setAttribute('id', 'edit-btn');
+        child1.setAttribute('class', 'edit-btn');
         roleDetails.appendChild(child);
         roleDetails.appendChild(secretId);
         roleDetails.appendChild(child1);
@@ -121,26 +118,39 @@ class Roles {
         roleDetails.appendChild(child1);
         parent.appendChild(roleDetails);
         //last element
-        var hyperLink = document.createElement('a');
-        // hyperLink.setAttribute("href","role-descr.html");
+        var hyperLink = document.createElement('div');
         hyperLink.setAttribute("class", "role-descr-btn");
-        //hyperLink.setAttribute('onclick','roleEmployees(this)');
-        var child2 = document.createElement("p");
-        child2.setAttribute("class", "view-employee m-8");
+        var span1 = document.createElement("span");
         var text = document.createTextNode("View all employees");
+        var span = document.createElement('span');
+        span.setAttribute("class", "view-employee m-8");
         var img = document.createElement("img");
         img.setAttribute("src", "images/Vector.svg");
-        child2.appendChild(text);
-        child2.appendChild(img);
-        hyperLink.appendChild(child2);
+        span1.appendChild(text);
+        span.appendChild(span1);
+        span.appendChild(img);
+        hyperLink.appendChild(span);
         parent.appendChild(hyperLink);
         //add to section
         var rolesInfo = document.getElementsByClassName("roles-info")[0];
         rolesInfo.appendChild(parent);
     }
-    EmployeesList = JSON.parse(localStorage.getItem('roleData'));
-    cureentRolesList = [...this.EmployeesList];
+    EmployeesList;
+    cureentRolesList;
     constructor() {
+        if (localStorage.getItem('roleData')) {
+            this.EmployeesList = JSON.parse(localStorage.getItem('roleData'));
+        }
+        else {
+            localStorage.setItem('roleData', JSON.stringify([]));
+            this.EmployeesList = [];
+        }
+        if (this.EmployeesList.length == 0) {
+            this.cureentRolesList = [];
+        }
+        else {
+            this.cureentRolesList = [...this.EmployeesList];
+        }
         this.printTable(this.cureentRolesList);
     }
     printTable(data) {
@@ -149,11 +159,10 @@ class Roles {
         }
     }
     roleEmployees(className) {
-        var roleDetails = className.parentElement.parentElement.firstChild;
+        var roleDetails = className.parentElement.parentElement.parentElement.firstChild;
         var roleName = roleDetails.firstChild.firstChild.innerHTML;
         var roleId = roleDetails.children[1].innerHTML;
         sessionStorage.setItem('role', JSON.stringify({ 'roleName': roleName, 'id': roleId }));
-        window.location.href = 'role-descr.html';
     }
     resetFilters() {
         this.deleteCards();
@@ -188,26 +197,5 @@ class Roles {
     editRoles(className) {
         var roleName = className.parentElement.firstChild.firstChild.innerHTML;
         sessionStorage.setItem("roleDetails", JSON.stringify({ 'roleName': roleName }));
-        window.location.href = 'addRoles.html';
     }
 }
-var rolesObject = new Roles();
-var employeeObject = new EmployeeOperations();
-new CommonOperations();
-document.addEventListener('change', function () {
-    employeeObject.activateButton('apply-btn');
-});
-document.addEventListener('click', function (e) {
-    if (e.target.className == 'apply-btn') {
-        rolesObject.applyFilter();
-    }
-    if (e.target.className == 'reset-btn') {
-        rolesObject.resetFilters();
-    }
-    if (e.target.id == 'edit-btn') {
-        rolesObject.editRoles(e.target);
-    }
-    if (e.target.className == 'view-employee m-8') {
-        rolesObject.roleEmployees(e.target);
-    }
-});

@@ -1,19 +1,20 @@
 import { employeeDetails, RoleInformation } from "./model.js";
-import { CommonOperations } from "./common.js";
+import { fetchEmployee, pages, styles } from "./main.js";
 
-if (!localStorage.getItem('data')) {
-    var myObject: employeeDetails[] = [];
-    localStorage.setItem('data', JSON.stringify(myObject));
-}
 export class EmployeeOperations {
-    public employeesList: employeeDetails[] = JSON.parse(localStorage.getItem('data')!); //change name to employeesList
-    public cureentEmployeeList = this.employeesList.slice(); //change name
-    //window.onload = (): void =>{this.printEmployeesTable(this.employeesList)};
+    public employeesList: employeeDetails[];
+    public cureentEmployeeList:employeeDetails[]; 
     public alphabetEployeeData: employeeDetails[] = [];
     public appliedFilter = false;
     public previous: HTMLElement | null | undefined;
     public alphabetFilter = false;
     constructor() {
+        if (!localStorage.getItem('data')) {
+            var myObject: employeeDetails[] = [];
+            localStorage.setItem('data', JSON.stringify(myObject));
+        }
+        this.employeesList= JSON.parse(localStorage.getItem('data')!);
+        this.cureentEmployeeList = this.employeesList.slice(); 
         this.printEmployeesTable(this.employeesList);
         this.createAplhabetFilter();
     }
@@ -23,7 +24,7 @@ export class EmployeeOperations {
         if(table){
             var row = table.insertRow(-1);
             // First td
-            var checkBox = row.insertCell(0); //change name
+            var checkBox = row.insertCell(0);
             var inputElement = document.createElement("input")
             inputElement.setAttribute("type", "checkbox");
             inputElement.setAttribute('class', "check-selected");
@@ -118,12 +119,9 @@ export class EmployeeOperations {
             this.cureentEmployeeList = this.employeesList;
         }
 
-        //remove unwanted code
         if (!(dept == 'none' && loc == 'none' && status == 'none')) {
             this.deleteEmployees();
             for (var i = 0; i < this.cureentEmployeeList.length; i++) {
-                //remove unwanted variable declaration
-
                 if ((dept == this.cureentEmployeeList[i].department || dept == 'none') &&
                     (loc == this.cureentEmployeeList[i].location || loc == 'none') &&
                     (status == this.cureentEmployeeList[i].status || status == 'none')) {
@@ -323,31 +321,46 @@ export class EmployeeOperations {
         var inputs: HTMLCollectionOf<HTMLInputElement> = table.getElementsByTagName("input");
         var roleData: RoleInformation[] = JSON.parse(localStorage.getItem("roleData")!);
         if (confirm("Are you sure.You want to Delete the data")) {
-            for (var i = 1; i < inputs.length; i++) {
-                if (inputs[i].checked) {
-                    var tr = inputs[i]!.parentElement!.parentElement!;
-                    var employeeNo = (tr.childNodes[5] as HTMLElement).innerHTML;
-                    this.employeesList.forEach(ele => {
-                        if (ele.empNo == employeeNo) {
-                            var index = this.employeesList.indexOf(ele);
-                            if (index !== -1) {
-                                this.employeesList.splice(index, 1);
-                            }
-                            if (roleData != null) {
-                                roleData.forEach((role: RoleInformation) => {
-                                    if (ele.jobTitle == role.designation) {
-                                        (role.employeesList).forEach((employee: employeeDetails) => {
-                                            if (employee.empNo == ele.empNo) {
-                                                (role.employeesList).splice((role.employeesList).indexOf(employee), 1);
-                                            }
-                                        })
-                                    }
-                                })
-                            }
-                        }
-                    });
+            inputs =(Array.from(inputs).filter((input) => {
+                if (input.checked) {
+                    return true;
                 }
-            }
+                else {
+                    return false;
+                }
+            })) as unknown as HTMLCollectionOf<HTMLInputElement>
+            var employeeNoList:string[]=[];
+            Array.from(inputs).forEach(input=>{
+                employeeNoList.push(((input!.parentElement!.parentElement!).childNodes[5] as HTMLElement).innerHTML);
+            })
+            employeeNoList.forEach(No=>{
+                Array.from(this.employeesList).filter((ele)=>{
+                    if (ele.empNo != No) {
+                            return ele;
+                        }
+                    })
+                });
+            employeeNoList.forEach(No=>{
+                Array.from(this.employeesList).filter((ele)=>{
+                    if (ele.empNo == No) {
+                        var index = this.employeesList.indexOf(ele);
+                        if (index !== -1) {
+                            this.employeesList.splice(index, 1);
+                        }
+                        if (roleData != null) {
+                            roleData.forEach((role: RoleInformation) => {
+                                if (ele.jobTitle == role.designation) {
+                                    role.employeesList = role.employeesList.filter(_ => {
+                                        if (_.empNo != ele.empNo) {
+                                            return ele.empNo;
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    }
+                })
+            })
             localStorage.setItem("data", JSON.stringify(this.employeesList));
             localStorage.setItem('roleData', JSON.stringify(roleData));
             this.deleteEmployees();
@@ -358,7 +371,7 @@ export class EmployeeOperations {
             }
         }
         else {
-            for (var i = 1; i < inputs.length; i++) {
+            for (var i = 0; i < inputs.length; i++) {
                 inputs[i].checked = false;
             }
         }
@@ -409,64 +422,7 @@ export class EmployeeOperations {
                 'isEdited': false
             };
             sessionStorage.setItem("updateDetails", JSON.stringify(obj));
-            window.location.href = 'add-employee.html';
+            fetchEmployee(pages.addEmployee,styles.addEmployee);
         }
     }
-}
-if (document.URL.includes('employees.html')) {
-    var object = new EmployeeOperations();
-    document.addEventListener('click', function (e) {
-        var targetName = (e.target! as HTMLElement).nodeName;
-
-        if ((e.target! as HTMLElement).tagName == 'LI') {
-            object.filterByAplhabet('filter', e.target! as HTMLElement)
-        }
-        else if ((e.target! as HTMLElement).id == 'filter-icon') {
-            object.removeFilter();
-        }
-        else if ((e.target! as HTMLElement).className == 'export-btn') {
-            object.exportData();
-        }
-        else if ((e.target! as HTMLElement).className == 'apply-btn') {
-            object.applyFilterOnEmployees();
-        }
-        else if ((e.target! as HTMLElement).className == 'reset-btn') {
-            object.resetFiltersOnEmployees();
-        }
-        else if ((e.target! as HTMLElement).id == 'delete-btn') {
-            object.deleteRows()
-        }
-        else if ((e.target! as HTMLElement).className == 'dots-image') {
-            object.editOptions(e.target! as HTMLElement);
-        }
-        else if ((e.target! as HTMLElement).className == 'edit-option') {
-            object.editEmployee(e.target! as HTMLInputElement);
-        }
-        else if ((e.target! as HTMLElement).className == 'sort-icon') {
-            object.sortDataByColumn((e.target! as HTMLInputElement).id);
-        }
-        else if (((e.target!) as HTMLElement).className == 'handle') {
-            new CommonOperations().toggleSideBar();
-        }
-        else if (targetName != "IMG" && targetName != "P") {
-            if (object.previous) {
-                object.previous.style.display = 'none';
-                object.previous = null;
-            }
-        }
-
-    }, true);
-
-    document.addEventListener('change', function (e) {
-        if ((e.target! as HTMLElement).id == 'status' || (e.target! as HTMLElement).id == 'location'
-            || (e.target! as HTMLElement).id == 'dept') {
-            object.activateButton('apply-btn');
-        }
-        else if ((e.target! as HTMLElement).className == 'checkbox-btn') {
-            object.selectCheckedRows(e.target! as HTMLInputElement)
-        }
-        else if ((e.target! as HTMLElement).className == 'check-selected') {
-            object.checkSelectedEmployees(e.target! as HTMLInputElement);
-        }
-    }, true);
 }
