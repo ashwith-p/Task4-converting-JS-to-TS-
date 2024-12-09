@@ -1,0 +1,49 @@
+
+        <div class="roles-form">
+        <p class="heading">Create New Role</p>
+        <form id="role-data" >
+            <div class="basic-info">
+                <div class="display-flex">
+                    <label for="RoleName">Role Name</label>
+                    <input type="text" placeholder="Text" id="designation" >
+                </div>
+                <div class="display-flex">
+                    <label for="Department">Department</label>
+                    <select  id="role-department">
+                        <option value="none" selected disabled hidden>Select</option>
+                        <option value="Product Engg.">Product Engineering</option>
+                        <option value="UI/UX">UI/UX</option>
+                        <option value="Quality Analyst">Quality Analyst</option>
+                    </select>
+                </div>
+            </div>
+            <div class="display-flex">
+                <label for="description">Description</label>
+                <textarea  rows="10" placeholder="Text" id="description"></textarea>
+            </div>
+            <div class="display-flex">
+                <label for="Location">Location</label>
+                        <select id="role-location" >
+                            <option value="none" selected disabled hidden>Select</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Mumbai">Mumbai</option>
+                        </select>
+            </div>
+            <div class="display-flex" >
+                <label for="Assign Employees">Assign Employees</label>
+                <input type="text" placeholder="Search for an Employee" id="assign-employees" >
+            
+            <div id="display-column">
+            
+                <!-- <div><img src="images/person1.jpg" alt="image"  id="display-img"><p>Ashwith Punugupati</p></div>
+                <input type="checkbox"> -->
+
+            </div>
+            </div>
+        </form>
+    </div>
+        <div class="buttons">
+            <input type="button" value="Cancel" class="cancel-btn" >
+            <input type="button"  value="Add Role" class="add-role-btn-addRole" >
+        </div>
